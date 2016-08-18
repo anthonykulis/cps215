@@ -4,8 +4,7 @@ public class Driver {
 
   public static void main(String args[]){
     SodaBottle sb = new SodaBottle("Fango", 40.0);
-    boolean itWorked = false;
-    itWorked = sb.fill();
+    boolean itWorked = sb.fill();
     System.out.println("I have the cap on and filled it? " + itWorked);
     sb.cap.remove();
     sb.fill();
