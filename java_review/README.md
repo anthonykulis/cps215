@@ -48,6 +48,8 @@ In bottle/SodaBottle.java. Do you see the repeated methods in this class compare
 
 ## Testing
 Testing is always a good thing. If you have time in class to derive the tests, for each class create a **main** method to test each of your classes other methods. Use `throw new RuntimeException(String string)` if you get an unexpected return.
+## Optional
+If you are more comfortable using a driver to test, that is ok. While its not the best approach in a real-world situation, this is also only a 200 level class. Feel free to run a driver instead. I included one in the source path, but it is very limited since I wrote unit tests for each class.
 ## Grading
 This is an ungraded exercise.
 ## Due Date
