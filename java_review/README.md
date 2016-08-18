@@ -26,7 +26,7 @@ In bottle/Bottle.java
     public Bottle(double capacity);
     public boolean addLiquid(double amount);
     public boolean fill();
-    public boolean pour();
+    public boolean pour(double amount);
     public double getCurrentVolume();
     public double getCapacity();
     public double empty();
