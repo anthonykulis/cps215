@@ -2,3 +2,4 @@
 ### [Syllabus](https://goo.gl/ruYuhC)
 ##TOC
 * [Java Review](java_review/)
+* [Bags](data_structures/bags)
