@@ -5,12 +5,12 @@ import cap.Cap;
 
 public class SodaBottle extends Bottle {
 
-  private String type;
+  private String _type;
   public Cap cap;
 
   public SodaBottle(String type, double capacity){
     super(capacity);
-    this.type = type;
+    this._type = type;
     this.cap = new Cap();
     this.cap.attach();
   }
@@ -44,7 +44,7 @@ public class SodaBottle extends Bottle {
   }
 
   public String getType(){
-    return this.type;
+    return this._type;
   }
 
 
