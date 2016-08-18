@@ -32,7 +32,7 @@ In bottle/Bottle.java
     public double empty();
   }
 ```
-In bottle/SodaBottle.java
+In bottle/SodaBottle.java. Do you see the repeated methods in this class compared to bottle? You will have to manage those appropriately. Hint: they are overriden for a reason and it has to do with the cap. Realize the Bottle.java class has no idea about the Cap.java class, so we must handle it here. Realistically, we would handle it in Bottle.java, but this is an exercise!
 ```
   public class SodaBottle extends Bottle {
     private String _type;
@@ -50,5 +50,5 @@ In bottle/SodaBottle.java
 Testing is always a good thing. If you have time in class to derive the tests, for each class create a **main** method to test each of your classes other methods. Use `throw new RuntimeException(String string)` if you get an unexpected return.
 ## Grading
 This is an ungraded exercise.
-## Due
+## Due Date
 There is no due date. This is for review.
