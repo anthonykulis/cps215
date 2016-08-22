@@ -208,7 +208,7 @@ public boolean contains(T item){
     if(item.equals(this._bag[itemsRe])){
       isFound = true;
     }
-    itemsRe--;
+    itemsRemaining--;
   }
 
   return isFound;
