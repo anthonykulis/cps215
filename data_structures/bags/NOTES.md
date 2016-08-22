@@ -59,7 +59,8 @@
   * Remember, the idea behind data structures is how we attack our problem! Because this makes the Bag pretty abstract, so it sounds like an abstract class may suffice. But then we may face the triangle issue. So how about we make it an interface?
 
 * As an interface:
-```
+
+```java
 public interface BagInterface<T> {
   public int getCurrentSize();
   public boolean isEmpty();
@@ -82,7 +83,7 @@ public interface BagInterface<T> {
 ### ArrayBag
 * We will implement the bag interface using an array an the underlying container
 
-```
+```java
 public final class ArrayBag<T> implements BagInterface<T> {
 
   public ArrayBag(){}
@@ -108,7 +109,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
 
 * Next we need to create some private member variables
 
-```
+```java
 // the bag itself
 private final T[] _bag;
 
@@ -121,7 +122,7 @@ private static final int DEFAULT_CAPACITY = 25;
 
 * Create the constructors
 
-```
+```java
 public ArrayBag(){
   this(DEFAULT_CAPACITY);
 }
@@ -140,7 +141,7 @@ public ArrayBag(int capacity){
 ```
 * Implement `getCurrentSize()`
 
-```
+```java
 public int getCurrentSize(){
   return this._countOfItems;
 }
@@ -148,7 +149,7 @@ public int getCurrentSize(){
 
 * Implement `isEmpty()`
 
-```
+```java
 public int isEmpty(){
   return this._countOfItems == 0;
 }
@@ -156,7 +157,7 @@ public int isEmpty(){
 
 * Implement `add()`
 
-```
+```java
 public boolean add(T item){
 
   if(!this._canIAddMore()){
@@ -171,7 +172,7 @@ public boolean add(T item){
 
 * Implement `remove()`
   * Question: why cant we just decrement the counter and ignore setting the last element to null?
-```
+```java
 public T remove(){
 
   if(this.isEmpty()){
@@ -189,7 +190,7 @@ public T remove(){
 
 * Implement `clear()`
 
-```
+```java
 public void clear(){
   this(DEFAULT_CAPACITY);
 }
@@ -197,7 +198,7 @@ public void clear(){
 
 * Implement `contains(T item)`
 
-```
+```java
 public boolean contains(T item){
 
   boolean isFound = false;
@@ -216,7 +217,7 @@ public boolean contains(T item){
 
 * Implement `toArray()`
   * Question: What is better to return reference or clone? And why?
-```
+```java
 public T[] toArray(){
   return this._bag.clone();
 }
