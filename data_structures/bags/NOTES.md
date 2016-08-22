@@ -202,7 +202,7 @@ public boolean contains(T item){
 
   boolean isFound = false;
   int itemsRemaining = this._countOfItems;
-  
+
   while(!isFound && itemsRemaining){
     if(item.equals(this._bag[itemsRe])){
       isFound = true;
@@ -211,5 +211,13 @@ public boolean contains(T item){
   }
 
   return isFound;
+}
+```
+
+* Implement `toArray()`
+  * Question: What is better to return reference or clone? And why?
+```
+public T[] toArray(){
+  return this._bag.clone();
 }
 ```
