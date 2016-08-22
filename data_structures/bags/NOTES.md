@@ -18,6 +18,7 @@
 * There is no inherent ordering (e.g. alphabetical)
 * There is no sorting (e.g. by size)
 * We don't care if there are duplicate items (e.g. multiple references of the same instance)
+* Slow to find items
 
 ### Responsibilities of the Bag
 * Get the number of items in the bag
@@ -28,8 +29,8 @@
 * Count the number of times a type shows up in the bag
   * Is there a problem with this? I think so
     * If we use generic types, unless we do some crazy lifting, we will need to depend on a `toString()` or similar type method to give us the type. If for some reason another engineer uses our class, they will have to know that the extra work in their bag item is required. This is no good. Not only does it *tightly couple* non-related classes, it also puts engineers into knowing special circumstances about our class. This is called *knowledge domain* and we want to avoid that. I'd much rather hire a new engineer and have them spend time learning the business logic of an application than spending time learning the idiosyncrasies of our libraries. Being said, we will not implement that feature and allow it to be extended by another engineer if the off chance it ever shows up.
-* Look to see if a certain item type exists (e.g. a particular Dog instance)
-* Look at all items in the bag iteratively
+* Look to see if a certain item type exists in the bag (e.g. a particular Dog instance)
+
 
 ### Bag Methods
 * `public int getCurrentSize()`
@@ -49,7 +50,7 @@
   * Did we put this instance in the bag already?
 * `public T[] toArray()`
   * Order our bag and return it as an array
-  
+
 ### As an interface or class?
 * Is it better to build this as an interface or an abstract class?
   * Remember the triangle issue of inheritance? It happens when I have a parent class, two sub classes, and a further sub-class than needs to parent the two other sub-classes.
