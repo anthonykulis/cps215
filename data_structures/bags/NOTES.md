@@ -78,3 +78,138 @@ public interface BagInterface<T> {
   * What if we just went to the root *Object* instead? We could now add any type we wanted. Remember if I created a SodaBottle class, it will eventually inherit Object! Because of this, I could put any type I wanted in. But this causes an issue. What if I added a class instance of Integer and a class instance of SodaBottle? If you were expecting SodaBottle, we would have to do all kinds of type checking. This would be bloated and not scalable and possibly a security risk.
 * To compromise the issues above, we can "truncate" all parent classes at the passed type. This means if we passed Bottle as the type, we can use SodaBottle or if we implemented it, BeerBottle. Alternatively, if we only wanted SodaBottles, we could pass it SodaBottles.
 * Implementation of a [Generic Class and Generic Interface](../../examples/generics)
+
+### ArrayBag
+* We will implement the bag interface using an array an the underlying container
+
+```
+public final class ArrayBag<T> implements BagInterface<T> {
+
+  public ArrayBag(){}
+
+  public ArrayBag(int capacity){}
+
+  public int getCurrentSize(){}
+
+  public boolean isEmpty(){}
+
+  public boolean add(T item){}
+
+  public T remove(){}
+
+  public void clear(){}
+
+  public boolean contains(T item){}
+
+  public T[] toArray(){}
+
+}
+```
+
+* Next we need to create some private member variables
+
+```
+// the bag itself
+private final T[] _bag;
+
+// the count of items in the bag
+private int _countOfItems;
+
+// the default capacity - for the overloaded constructor
+private static final int DEFAULT_CAPACITY = 25;
+```
+
+* Create the constructors
+
+```
+public ArrayBag(){
+  this(DEFAULT_CAPACITY);
+}
+
+public ArrayBag(int capacity){
+
+  // since the array will have null entries
+  @SuppressWarnings("unchecked");
+
+  T[] bag = (T[])new Object[capacity];
+
+  this._bag = bag;
+
+  this._countOfItems = 0;
+}
+```
+* Implement `getCurrentSize()`
+
+```
+public int getCurrentSize(){
+  return this._countOfItems;
+}
+```
+
+* Implement `isEmpty()`
+
+```
+public int isEmpty(){
+  return this._countOfItems == 0;
+}
+```
+
+* Implement `add()`
+
+```
+public boolean add(T item){
+
+  if(!this._canIAddMore()){
+    return false;
+  }
+
+  this._bag[this._countOfItems] = item;
+  this._countOfItems++;
+  return true;
+}
+```
+
+* Implement `remove()`
+  * Question: why cant we just decrement the counter and ignore setting the last element to null?
+```
+public T remove(){
+
+  if(this.isEmpty()){
+    return null;
+  }
+
+  T last = this._bag[this._countOfItems];
+  this._bag[this._countOfItems] = null;
+  this._countOfItems--;
+
+  return last;
+}
+```
+
+
+* Implement `clear()`
+
+```
+public void clear(){
+  this(DEFAULT_CAPACITY);
+}
+```
+
+* Implement `contains(T item)`
+
+```
+public boolean contains(T item){
+
+  boolean isFound = false;
+  int itemsRemaining = this._countOfItems;
+  
+  while(!isFound && itemsRemaining){
+    if(item.equals(this._bag[itemsRe])){
+      isFound = true;
+    }
+    itemsRe--;
+  }
+
+  return isFound;
+}
+```
