@@ -201,17 +201,16 @@ public void clear(){
 ```java
 public boolean contains(T item){
 
-  boolean isFound = false;
   int itemsRemaining = this._countOfItems;
 
-  while(!isFound && itemsRemaining){
+  while(itemsRemaining){
     if(item.equals(this._bag[itemsRe])){
-      isFound = true;
+      return true;
     }
     itemsRemaining--;
   }
 
-  return isFound;
+  return false;
 }
 ```
 
