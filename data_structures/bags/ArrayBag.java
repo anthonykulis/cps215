@@ -81,11 +81,11 @@ public final class ArrayBag<T> implements BagInterface<T> {
   }
 
   public T[] toArray(){
-
+    return this._bag.clone();
   }
 
   private boolean _isArrayFull(){
-
+    return this._capacity == this._count;
   }
 
 
