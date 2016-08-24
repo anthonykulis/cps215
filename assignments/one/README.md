@@ -12,7 +12,7 @@ We will need a method `_allocateMoreSpace()` which will add the `DEFAULT_CAPACIT
 When we remove an item requested by the user we leave a null cell in the array. We need to get rid of this. The easiest way to handle this to use `System.arraycopy()` twice. Once for the left side of the null and once for the right side of null.
 
 ### Pass/Fail
-This will be pass/fail. 25 points if you pass. To pass, you must have compilable code that runs correctly. Your unit tests will determine if they do. Unit tests are mandatory like they will be on all assignments.
+This will be pass/fail. 25 points if you pass. 0 if you dont. To pass, you must have compilable code that runs correctly. Your unit tests will determine if they do. Unit tests are mandatory like they will be on all assignments.
 
 ### Due Date
 The due date will be Friday Sept 2, 2016 at midnight. To be eligible for the assignment extra credit you must meet this deadline.
