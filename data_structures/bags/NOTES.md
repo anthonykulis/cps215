@@ -172,6 +172,7 @@ public boolean add(T item){
 
 * Implement `remove()`
   * Question: why cant we just decrement the counter and ignore setting the last element to null?
+
 ```java
 public T remove(){
 
@@ -216,6 +217,7 @@ public boolean contains(T item){
 
 * Implement `toArray()`
   * Question: What is better to return reference or clone? And why?
+  
 ```java
 public T[] toArray(){
   return this._bag.clone();
