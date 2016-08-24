@@ -5,6 +5,8 @@ public final class ArrayBag<T> implements BagInterface<T> {
   private final T[] _bag;
   private int _count;
   private static final int DEFAULT_CAPACITY = 25;
+  private int _capacity;
+
 
 
 
@@ -17,6 +19,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
     T[] bag = (T[])new Object[capacity];
     this._bag = bag;
     this _count = 0;
+    this._capacity = capacity;
   }
 
   public int getCurrentSize(){
@@ -48,10 +51,22 @@ public final class ArrayBag<T> implements BagInterface<T> {
   }
 
   public T remove(T item){
-    int index = 0;
-
-    if(this.isEmpty()){
+    int index=contains(item);
+    if (index==-1){
       return null;
+    }
+    T item = this._bag[index];
+    this._bag[index] = null;
+    return item;
+  }
+
+  public void clear(){
+    this(this._capacity);
+  }
+
+  public int contains(T item){
+    if(this.isEmpty()){
+      return -1;
     }
     while (!item.equals(this._bag[index]) && index < _count)
     {
@@ -60,20 +75,9 @@ public final class ArrayBag<T> implements BagInterface<T> {
 
     // if the index reached count, that means we never found the item
     if (index == _count) {
-      return null;
+      return -1;
     }
-
-    T item = this._bag[index];
-    this._bag[index] = null;
-    return item;
-  }
-
-  public void clear(){
-
-  }
-
-  public boolean contains(T item){
-
+    return index;
   }
 
   public T[] toArray(){
