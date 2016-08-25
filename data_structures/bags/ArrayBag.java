@@ -153,6 +153,9 @@ public final class ArrayBag<T> implements BagInterface<T> {
       throw new RuntimeException("That yolo i got... not yolo but " + yolo);
     }
 
+    if(ab.getCurrentSize() != 0){
+      throw new RuntimeException("I removed yolo, got yolo back, know its not in the bag, got a size not 0 but " + ab.getCurrentSize());
+    }
 
     // now add 3 different ones, remove the second, then hope we only have 2 in sequence after the remove
     String dog = "Dog";
@@ -176,9 +179,6 @@ public final class ArrayBag<T> implements BagInterface<T> {
       throw new RuntimeException("Went to see if yolo still was there. It was. But I removed it");
     }
 
-    if(ab.getCurrentSize() != 0){
-      throw new RuntimeException("I removed yolo, got yolo back, know its not in the bag, got a size not 0");
-    }
 
     ab.add(yolo);
 
@@ -197,7 +197,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
       throw new RuntimeException("I just cleared but the array is not empty");
     }
 
-    // bag resizing - doing i count to prevent infinite loops
+    // bag resizing - only doing an i-count to prevent infinite loops
     int i = 0;
     while(ab.add(yolo) && i < ab.MAX_CAPACITY + 5){ i++; }
     yolos = ab.toArray();
