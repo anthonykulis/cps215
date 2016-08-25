@@ -154,6 +154,8 @@ public final class ArrayBag<T> implements BagInterface<T> {
       throw new RuntimeException("That yolo i got... not yolo but " + yolo);
     }
 
+    
+
 
     // now add 3 different ones, remove the second, then hope we only have 2 in sequence after the remove
     String dog = "Dog";
