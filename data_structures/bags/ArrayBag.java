@@ -30,7 +30,8 @@ public final class ArrayBag<T> implements BagInterface<T> {
       return false;
     }
 
-    this._bag[_count] = item;
+    this._bag[this._count] = item;
+
     this._count++;
 
     return true;
@@ -41,7 +42,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
       return null;
     }
 
-    T item = this._bag[this._count];
+    T item = this._bag[this._count - 1];
     this._bag[_count] = null;
     this._count--;
 
@@ -90,8 +91,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
   }
 
   private void _buildInternalArray(int capacity){
-    T[] bag = (T[])new Object[capacity];
-    this._bag = bag;
+    this._bag = (T[])new Object[capacity];
     this._count = 0;
   }
 
