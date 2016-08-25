@@ -22,8 +22,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
   }
 
   public boolean isEmpty(){
-    return this._count != 0;
-
+    return this._count == 0;
   }
 
   public boolean add(T item){
