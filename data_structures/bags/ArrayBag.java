@@ -5,16 +5,11 @@ public final class ArrayBag<T> implements BagInterface<T> {
   private  T[] _bag;
   private int _count;
   private static final int DEFAULT_CAPACITY = 25;
-  private int _capacity;
+  private static final int MAX_CAPACITY = 1000;
+  private int _currentCapacity = 25;
 
   public ArrayBag(){
-    this(DEFAULT_CAPACITY);
-  }
-
-  public ArrayBag(int capacity){
-    // @SuppressWarnings("unchecked");
-    this._buildInternalArray(capacity);
-    this._capacity = capacity;
+    this._buildInternalArray(DEFAULT_CAPACITY);
   }
 
   public int getCurrentSize(){
@@ -26,7 +21,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
   }
 
   public boolean add(T item){
-    if(this._isArrayFull()){
+    if(this._isArrayFull() && !this._allocateMoreSpace()){
       return false;
     }
 
@@ -58,11 +53,26 @@ public final class ArrayBag<T> implements BagInterface<T> {
     T foundItem = this._bag[index];
     this._bag[index] = null;
 
+    // combine into a new array
+    T[] _temp = (T[])new Object[this._currentCapacity];
+
+    // left
+    System.arraycopy(this._bag, 0, _temp, 0, index);
+
+    // right
+    System.arraycopy(this._bag, index + 1, _temp, index, this.getCurrentSize() - index);
+
+    // drop the old one in favor of the new one
+    this._bag = _temp;
+
+    // reduce count - this was forgotten in class solution
+    this._count--;
+
     return foundItem;
   }
 
   public void clear(){
-    this._buildInternalArray(this._capacity);
+    this._buildInternalArray(DEFAULT_CAPACITY);
   }
 
   public int contains(T item){
@@ -87,22 +97,29 @@ public final class ArrayBag<T> implements BagInterface<T> {
   }
 
   private boolean _isArrayFull(){
-    return this._capacity == this._count;
+    return this._currentCapacity == this._count;
   }
 
   private void _buildInternalArray(int capacity){
-    this._bag = (T[])new Object[capacity];
+    this._bag = (T[])new Object[DEFAULT_CAPACITY];
     this._count = 0;
+    this._currentCapacity = DEFAULT_CAPACITY;
+  }
+
+  private boolean _allocateMoreSpace(){
+    if(this._currentCapacity == MAX_CAPACITY){
+      return false;
+    }
+    T[] _temp = (T[])new Object[this._currentCapacity + DEFAULT_CAPACITY];
+    System.arraycopy(this._bag, 0, _temp, 0, this._currentCapacity);
+    this._currentCapacity += DEFAULT_CAPACITY;
+    this._bag = _temp;
+
+    return true;
   }
 
   // Tests
   public static void main(String args[]){
-
-    ArrayBag<String> hugeCap = new ArrayBag<>(1000);
-    Object[] hc = hugeCap.toArray();
-    if(hc.length != 1000){
-      throw new RuntimeException("I made a bag with a capacity of 1000 and its " + hc.length);
-    }
 
     ArrayBag<String> ab = new ArrayBag<>();
     if(ab.getCurrentSize() != 0){
@@ -137,6 +154,25 @@ public final class ArrayBag<T> implements BagInterface<T> {
       throw new RuntimeException("That yolo i got... not yolo but " + yolo);
     }
 
+
+    // now add 3 different ones, remove the second, then hope we only have 2 in sequence after the remove
+    String dog = "Dog";
+    String cat = "Cat";
+    ab.add(dog);
+    ab.add(cat);
+    ab.add(dog);
+    ab.remove(cat);
+
+    if(ab.getCurrentSize() != 2){
+      throw new RuntimeException("I had three, removed the middle one, have length 3");
+    }
+    Object[] dogs = ab.toArray();
+
+    if(!(dogs[0].equals("Dog") && dogs[1].equals("Dog"))){
+      throw new RuntimeException("I removed the cat. We should have only dogs. We have something besides dogs");
+    }
+
+
     if(ab.contains(yolo) > -1){
       throw new RuntimeException("Went to see if yolo still was there. It was. But I removed it");
     }
@@ -156,6 +192,19 @@ public final class ArrayBag<T> implements BagInterface<T> {
 
     if(!ab.isEmpty()){
       throw new RuntimeException("I just cleared but the array is not empty");
+    }
+
+    // bag resizing - doing i count to prevent infinite loops
+    int i = 0;
+    while(ab.add(yolo) && i < ab.MAX_CAPACITY + 5){ i++; }
+    yolos = ab.toArray();
+    if(yolos.length > ab.MAX_CAPACITY){
+      throw new RuntimeException("I was able to add " + yolos.length + " yolos when max is " + ab.MAX_CAPACITY);
+    }
+
+    // I should have 1000 of them
+    if(ab.getCurrentSize() != ab.MAX_CAPACITY){
+      throw new RuntimeException("I put max cap in, got not max cap");
     }
 
     System.out.println("Woot. Completed Arraybag tests");
