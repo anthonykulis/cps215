@@ -155,8 +155,6 @@ public final class ArrayBag<T> implements BagInterface<T> {
     }
 
     
-
-
     // now add 3 different ones, remove the second, then hope we only have 2 in sequence after the remove
     String dog = "Dog";
     String cat = "Cat";
