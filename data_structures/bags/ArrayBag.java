@@ -65,7 +65,6 @@ public final class ArrayBag<T> implements BagInterface<T> {
     // drop the old one in favor of the new one
     this._bag = _temp;
 
-    // reduce count - this was forgotten in class solution
     this._count--;
 
     return foundItem;
@@ -154,7 +153,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
       throw new RuntimeException("That yolo i got... not yolo but " + yolo);
     }
 
-    
+
     // now add 3 different ones, remove the second, then hope we only have 2 in sequence after the remove
     String dog = "Dog";
     String cat = "Cat";
@@ -175,6 +174,10 @@ public final class ArrayBag<T> implements BagInterface<T> {
 
     if(ab.contains(yolo) > -1){
       throw new RuntimeException("Went to see if yolo still was there. It was. But I removed it");
+    }
+
+    if(ab.getCurrentSize() != 0){
+      throw new RuntimeException("I removed yolo, got yolo back, know its not in the bag, got a size not 0");
     }
 
     ab.add(yolo);
