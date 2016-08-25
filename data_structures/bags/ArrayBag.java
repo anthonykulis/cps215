@@ -58,6 +58,8 @@ public final class ArrayBag<T> implements BagInterface<T> {
     T foundItem = this._bag[index];
     this._bag[index] = null;
 
+    this._count--;
+
     return foundItem;
   }
 
@@ -141,6 +143,10 @@ public final class ArrayBag<T> implements BagInterface<T> {
       throw new RuntimeException("Went to see if yolo still was there. It was. But I removed it");
     }
 
+    if(ab.getCurrentSize() != 0){
+      throw new RuntimeException("I removed yolo, got yolo back, know its not in the bag, got a size not 0");
+    }
+    
     ab.add(yolo);
 
     if(ab.contains(yolo) == -1){
