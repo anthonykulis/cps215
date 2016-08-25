@@ -6,6 +6,6 @@ public interface BagInterface<T> {
   public boolean add(T item);
   public T remove();
   public void clear();
-  public boolean contains(T item);
+  public int contains(T item);
   public T[] toArray();
 }

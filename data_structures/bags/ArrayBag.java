@@ -2,32 +2,27 @@ package data_structures.bags;
 
 
 public final class ArrayBag<T> implements BagInterface<T> {
-  private final T[] _bag;
+  private  T[] _bag;
   private int _count;
   private static final int DEFAULT_CAPACITY = 25;
   private int _capacity;
 
-
-
-
   public ArrayBag(){
-    this(CAPACITY);
+    this(DEFAULT_CAPACITY);
   }
 
   public ArrayBag(int capacity){
-    @SuppressWarnings("unchecked");
-    T[] bag = (T[])new Object[capacity];
-    this._bag = bag;
-    this _count = 0;
+    // @SuppressWarnings("unchecked");
+    this._buildInternalArray(capacity);
     this._capacity = capacity;
   }
 
   public int getCurrentSize(){
-    return this _count;
+    return this._count;
   }
 
   public boolean isEmpty(){
-    return  (_count!=0);
+    return this._count != 0;
 
   }
 
@@ -35,8 +30,10 @@ public final class ArrayBag<T> implements BagInterface<T> {
     if(this._isArrayFull()){
       return false;
     }
+
     this._bag[_count] = item;
-    _count++;
+    this._count++;
+
     return true;
   }
 
@@ -44,37 +41,42 @@ public final class ArrayBag<T> implements BagInterface<T> {
     if(this.isEmpty()){
       return null;
     }
-    T item = this._bag[_count];
+
+    T item = this._bag[this._count];
     this._bag[_count] = null;
-    _count--;
+    this._count--;
+
     return item;
   }
 
   public T remove(T item){
-    int index=contains(item);
-    if (index==-1){
+    int index = contains(item);
+    if(index == -1){
       return null;
     }
-    T item = this._bag[index];
+
+    T foundItem = this._bag[index];
     this._bag[index] = null;
-    return item;
+
+    return foundItem;
   }
 
   public void clear(){
-    this(this._capacity);
+    this._buildInternalArray(this._capacity);
   }
 
   public int contains(T item){
     if(this.isEmpty()){
       return -1;
     }
-    while (!item.equals(this._bag[index]) && index < _count)
-    {
+
+    int index = 0;
+    while (!item.equals(this._bag[index]) && index < _count){
       index++;
     }
 
     // if the index reached count, that means we never found the item
-    if (index == _count) {
+    if(index == _count){
       return -1;
     }
     return index;
@@ -88,9 +90,15 @@ public final class ArrayBag<T> implements BagInterface<T> {
     return this._capacity == this._count;
   }
 
+  private void _buildInternalArray(int capacity){
+    T[] bag = (T[])new Object[capacity];
+    this._bag = bag;
+    this._count = 0;
+  }
 
   // Tests
   public static void main(String args[]){
+
 
   }
 }
