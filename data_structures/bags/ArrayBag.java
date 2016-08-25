@@ -98,6 +98,61 @@ public final class ArrayBag<T> implements BagInterface<T> {
   // Tests
   public static void main(String args[]){
 
+    ArrayBag<String> ab = new ArrayBag<>();
+    if(ab.getCurrentSize() != 0){
+      throw new RuntimeException("Just initialized and it has size");
+    }
+
+    if(!ab.isEmpty()){
+      throw new RuntimeException("Just initialized and its not empty");
+    }
+
+    if(!ab.add(new String("yolo"))){
+      throw new RuntimeException("I tried to add to an empty bag and got rejected");
+    }
+
+    String yolo = ab.remove();
+    if(yolo == null){
+      throw new RuntimeException("Got returned null when I expected yolo");
+    }
+
+    if(!yolo.equals("yolo")){
+      throw new RuntimeException("expected yolo got " + yolo);
+    }
+
+    ab.add(yolo);
+
+    yolo = ab.remove(yolo);
+    if(yolo == null){
+      throw new RuntimeException("Added yolo back and tried to find it. That didn't work");
+    }
+
+    if(!yolo.equals("yolo")){
+      throw new RuntimeException("That yolo i got... not yolo but " + yolo);
+    }
+
+    if(ab.contains(yolo) > -1){
+      throw new RuntimeException("Went to see if yolo still was there. It was. But I removed it");
+    }
+
+    ab.add(yolo);
+
+    if(ab.contains(yolo) == -1){
+      throw new RuntimeException("I added yolo back, looked for it in contains, couldnt find it");
+    }
+
+    Object[] yolos = ab.toArray();
+    if(yolos.length != 25){
+      throw new RuntimeException("I expected an array length of 25 and got " + yolos.length);
+    }
+
+    ab.clear();
+
+    if(!ab.isEmpty()){
+      throw new RuntimeException("I just cleared but the array is not empty");
+    }
+
+    System.out.println("Woot. Completed Arraybag tests");
 
   }
 }
