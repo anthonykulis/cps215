@@ -98,6 +98,12 @@ public final class ArrayBag<T> implements BagInterface<T> {
   // Tests
   public static void main(String args[]){
 
+    ArrayBag<String> hugeCap = new ArrayBag<>(1000);
+    Object[] hc = hugeCap.toArray();
+    if(hc.length != 1000){
+      throw new RuntimeException("I made a bag with a capacity of 1000 and its " + hc.length);
+    }
+
     ArrayBag<String> ab = new ArrayBag<>();
     if(ab.getCurrentSize() != 0){
       throw new RuntimeException("Just initialized and it has size");
