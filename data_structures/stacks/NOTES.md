@@ -65,6 +65,8 @@ public interface StackInterface<T>{
   * `public void unshift(T item)` - identical to `push` but works from the front
 
 * We will create a second interface `StackShiftUnshiftInterface` and add these methods.
+* We will see in next week that this is actually called a *Dequeue* and why this is our preferred "stack/queue" unless very specific reasons prevent us from using this.
+  * Being said, the following interface does not exist logically in JCF, but will be used as an example here. We shall update it to Dequeue later.
 
 ### StackShiftUnshiftInterface
 ```java
@@ -167,9 +169,9 @@ public void setData(T data){
 
 
 
-### Stack Implementation using both interfaces
+### Stack Implementation using both interfaces - Dequeue
 ```java
-public class Stack<T> implements StackInterface<T>, StackShiftUnshiftInterface<T>{
+public class NodeStack<T> implements StackInterface<T>, StackShiftUnshiftInterface<T>{
   private Node _top, _bottom;
 
   public Stack(){}
