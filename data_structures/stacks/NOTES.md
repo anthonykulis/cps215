@@ -7,7 +7,7 @@
   * Boxes
 
 * You can only add and remove from the top one at a time.
-* **LAST-IN FIRST-OUT** aka *LIFO*
+* **LAST-IN FIRST-OUT** aka **LIFO**
 * Similar to *Bag* except we only work with the last element added (top of the stack).
 * Yes, this is the same type of *stack* from the phrase *stack and heap*
 
@@ -18,14 +18,16 @@
 
 ### Weaknesses
 * Unlike bag, we cannot look at its contents, only last element
-* Has limited size
+* Has limited size?
 
 ### When to use
 * There are many instances of a stack in action.
   * Calculators
+    * Postfix vs Infix
   * Depth First Search
   * Browsers *Back* and *Forward* buttons
   * In compilers
+    * Balanced delimiters - example: `{{(){}(){()[]}(){}}}`
 
 * Use a stack when the order matters and the when the retrieval might be interrupted by some other actions (e.g. push items back on stack). Remember, if the solution to a problem calls for First In Last Out, you might want a stack.
 
@@ -58,39 +60,20 @@ public interface StackInterface<T>{
 }
 ```
 
-## Not Enough!
-* Our stack is limited. We can only take from the top.
-* Many programming languages offer a way to take from the bottom.
-  * `public T shift()` - identical to `pop` but works on the front
-  * `public void unshift(T item)` - identical to `push` but works from the front
-
-* We will create a second interface `StackShiftUnshiftInterface` and add these methods.
-* We will see in next week that this is actually called a *Dequeue* and why this is our preferred "stack/queue" unless very specific reasons prevent us from using this.
-  * Being said, the following interface does not exist logically in JCF, but will be used as an example here. We shall update it to Dequeue later.
-
-### StackShiftUnshiftInterface
-```java
-public interface StackShiftUnshiftInterface<T>{
-  public void unshift(T item);
-  public T shift();
-}
-```
-
-## Introduction of the Node
+## Introduction of the `Node`
 
 ### Concept
 * The `Node` class is a heap implementation!
 * Leveraging the heap, we can create an object that points to another object.       
-  * The array is implemented on stack.
+  * Alternatively - The array is implemented on stack.
     * This limits growth unless we allocate more memory
-    * Allocation is expensive.
+    * Allocation and reallocation of memory used in arrays is expensive.
 * Each node points to the next Node instance
   * Access via `public Node next()`
 * Each node points to one single generic item
-  * Access via `public T getItem()`
-* Requires our implementation to reference one|two Nodes depending on interfaces used
+  * Access via `public T getData()`
+* Requires our implementation to reference one Node
   * Keep a reference to the top of the stack for `StackInterface`
-  * Keep a reference to the bottom of the stack for `StackShiftUnshiftInterface`
 
 ### Node Class
 ```java
@@ -169,20 +152,16 @@ public void setData(T data){
 
 
 
-### Stack Implementation using both interfaces - Dequeue
+### Stack Implementation
 ```java
-public class NodeStack<T> implements StackInterface<T>, StackShiftUnshiftInterface<T>{
-  private Node _top, _bottom;
+public class NodeStack<T> implements StackInterface<T> {
+  private Node _top;
 
-  public Stack(){}
+  public NodeStack(){}
 
   public void push(T item){}
 
   public T pop(){}
-
-  public void unshift(T item){}
-
-  public T shift(){}
 
   public T peek(){}
 
@@ -190,5 +169,68 @@ public class NodeStack<T> implements StackInterface<T>, StackShiftUnshiftInterfa
 
   public void clear(){}   
 
+}
+```
+
+#### Constructor
+* Make life declarative, simply call clear
+```java
+public NodeStack(){
+  this.clear();
+}
+```
+
+#### Push
+* We have two possibilities here
+  1. Either the stack is empty
+  2. Or the stack has data already
+* We need to pay attention to our composite Node class
+  * It only has two constructors
+    * One takes no arguments
+    * The overloaded one requires both a `T item` and a `Node next`
+  * Since we dont have a `next` on first push, we have to do an extra step.
+* Also, since we are encapsulating `Node`, the user will only push their actual data. This means we need to create a Node object to use.
+```java
+public void push(T item){
+  Node<T> n;
+  if(this.isEmpty()){
+    n = new Node<>();
+    n.setData(item);
+  } else {
+    n = new Node<>(item, this._top);
+  }
+
+  this._top = n;
+}
+```
+
+#### Pop
+* Since we are encapsulating `Node`, we need to perform the `getData()` method on it before we return the value.
+```java
+public T pop(){
+  Node<T> n = this._top;
+  this._top = n.next();
+  return (T)n.getData();
+}
+```
+
+#### Peek
+* Simply return the data sitting on top of the stack
+```java
+public T peek(){
+  return (T)this._top.getData();
+}
+```
+
+#### isEmpty and clear
+* We've seen this before. Its pretty much the same as all the others.
+
+```java
+public boolean isEmpty(){
+  return this._top == null;
+}
+
+public void clear(){
+  this._top = null;
 }
 ```
