@@ -98,13 +98,14 @@ public class Node<T>{
   private T _data;
   private Node _next;
 
+  public Node(){}
   public Node(T item, Node next){}
 
   public Node next(){}
 
   public void link(Node next){}
 
-  public Node unlink(){}
+  public void unlink(){}
 
   public T getData(){}
 
@@ -113,13 +114,65 @@ public class Node<T>{
 }
 ```
 
+### Node Implementation
+
+#### Constructors
+```java
+
+public class Node(){
+  this._data = null;
+  this._next = null;
+}
+
+public Node(T item, Node next){
+  this.setData(item);
+  this.link(next);
+}
+```
+#### Getting the next node
+```java
+public Node next(){
+  return this._next;
+}
+```
+
+#### Linking the next Node
+```java
+public void link(Node next){
+  this._next = next;
+}
+```
+
+#### Unlink the next Node
+```java
+public void unlink(){
+  this._next = null;
+}
+```
+
+#### Getting the nodes data
+```java
+public T getData(){
+  return this._data;
+}
+```
+
+### Setting the nodes data
+```java
+public void setData(T data){
+  this._data = data;
+}
+```
+
+
+
 
 ### Stack Implementation using both interfaces
 ```java
-public class Node<T> implements StackInterface, StackShiftUnshiftInterface{
-  private T _top, _bottom;
+public class Stack<T> implements StackInterface<T>, StackShiftUnshiftInterface<T>{
+  private Node _top, _bottom;
 
-  public Node(){}
+  public Stack(){}
 
   public void push(T item){}
 
