@@ -1,3 +1,5 @@
+package data_structures.nodes;
+
 public class Node<T>{
 
   private T _data;
@@ -7,7 +9,7 @@ public class Node<T>{
     this._data = null;
     this._next = null;
   }
-  
+
   public Node(T item, Node next){
     this.setData(item);
     this.link(next);
@@ -21,7 +23,7 @@ public class Node<T>{
     this._next = next;
   }
 
-  public Node unlink(){
+  public void unlink(){
     this._next = null;
   }
 
@@ -34,6 +36,26 @@ public class Node<T>{
   }
 
   public static void main(String args[]){
-    Node<String> n = new Node<>();
+    String[] numbers = {"One", "Two"};
+    Node<String> two = new Node<>();
+    two.setData(numbers[1]);
+    Node<String> one = new Node<>(numbers[0], two);
+
+    if(one.getData() == null){
+      throw new RuntimeException("I set data, yet I cannot get data from the node");
+    }
+
+    if(one.next() == null){
+      throw new RuntimeException("I set the next node but get null on next()");
+    }
+
+    one.unlink();
+
+    if(one.next() != null){
+      throw new RuntimeException("I unlinked two from one, but was still able to call next on it");
+    }
+
+    System.out.println("Node tests success");
+
   }
 }
