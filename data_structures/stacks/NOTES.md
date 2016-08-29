@@ -99,7 +99,7 @@ public class Node<T>{
 }
 ```
 
-### Node Implementation
+### [Node Implementation](../nodes/)
 
 #### Constructors
 ```java
