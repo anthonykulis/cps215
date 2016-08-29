@@ -61,9 +61,10 @@ public class NodeStack<T> implements StackInterface<T>{
   }
 
   public T peek(){
+    if(this._top == null){ return null; }
     return (T)this._top.getData();
   }
-  
+
   public boolean isEmpty(){
     return this._top == null;
   }
