@@ -3,7 +3,7 @@ package data_structures.stacks;
 import data_structures.nodes.Node;
 
 public class NodeStack<T> implements StackInterface<T>{
-  
+
   private Node _top;
 
   public NodeStack(){
@@ -34,6 +34,7 @@ public class NodeStack<T> implements StackInterface<T>{
   }
 
   public T pop(){
+    if(this._top == null){ return null; }
     Node<T> n = this._top;
     this._top = n.next();
     return (T)n.getData();

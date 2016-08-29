@@ -208,6 +208,7 @@ public void push(T item){
 * Since we are encapsulating `Node`, we need to perform the `getData()` method on it before we return the value.
 ```java
 public T pop(){
+  if(this._top == null){ return null; }
   Node<T> n = this._top;
   this._top = n.next();
   return (T)n.getData();
