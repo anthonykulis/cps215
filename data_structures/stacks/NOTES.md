@@ -219,6 +219,7 @@ public T pop(){
 * Simply return the data sitting on top of the stack
 ```java
 public T peek(){
+  if(this._top == null){ return null; }
   return (T)this._top.getData();
 }
 ```
