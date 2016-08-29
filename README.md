@@ -3,7 +3,7 @@
 ##TOC
 * [Java Review](java_review/)
 * [Bags](data_structures/bags)
-
+* [Stacks](data_structures/stacks)
 
 ### Assignments
 * [One](assignments/one/)
