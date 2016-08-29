@@ -2,46 +2,55 @@ package data_structures.bags;
 
 
 public final class ArrayBag<T> implements BagInterface<T> {
-  private  T[] _bag;
-  private int _count;
+  // the bag itself
+  private T[] _bag;
+
+  // the count of items in the bag
+  private int _countOfItems;
+
+  // the default capacity - for the overloaded constructor
   private static final int DEFAULT_CAPACITY = 25;
-  private static final int MAX_CAPACITY = 1000;
-  private int _currentCapacity = 25;
+
+  private int _capacity;
 
   public ArrayBag(){
-    this._buildInternalArray(DEFAULT_CAPACITY);
+    this(DEFAULT_CAPACITY);
+  }
+
+  public ArrayBag(int capacity){
+    this._buildInternalArray(capacity);
   }
 
   public int getCurrentSize(){
-    return this._count;
+    return this._countOfItems;
   }
 
-  public boolean isEmpty(){
-    return this._count == 0;
+  public int isEmpty(){
+    return this._countOfItems == 0;
   }
 
   public boolean add(T item){
-    if(this._isArrayFull() && !this._allocateMoreSpace()){
+
+    if(!this._canIAddMore()){
       return false;
     }
 
-    this._bag[this._count] = item;
-
-    this._count++;
-
+    this._bag[this._countOfItems] = item;
+    this._countOfItems++;
     return true;
   }
 
   public T remove(){
+
     if(this.isEmpty()){
       return null;
     }
 
-    T item = this._bag[this._count - 1];
-    this._bag[_count] = null;
-    this._count--;
+    T last = this._bag[this._countOfItems];
+    this._bag[this._countOfItems] = null;
+    this._countOfItems--;
 
-    return item;
+    return last;
   }
 
   public T remove(T item){
@@ -53,25 +62,11 @@ public final class ArrayBag<T> implements BagInterface<T> {
     T foundItem = this._bag[index];
     this._bag[index] = null;
 
-    // combine into a new array
-    T[] _temp = (T[])new Object[this._currentCapacity];
-
-    // left
-    System.arraycopy(this._bag, 0, _temp, 0, index);
-
-    // right
-    System.arraycopy(this._bag, index + 1, _temp, index, this.getCurrentSize() - index);
-
-    // drop the old one in favor of the new one
-    this._bag = _temp;
-
-    this._count--;
-
     return foundItem;
   }
 
   public void clear(){
-    this._buildInternalArray(DEFAULT_CAPACITY);
+    this._buildInternalArray(this.capacity);
   }
 
   public int contains(T item){
@@ -80,7 +75,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
     }
 
     int index = 0;
-    while (!item.equals(this._bag[index]) && index < _count){
+    while (index < _count && !item.equals(this._bag[index])){
       index++;
     }
 
@@ -100,22 +95,11 @@ public final class ArrayBag<T> implements BagInterface<T> {
   }
 
   private void _buildInternalArray(int capacity){
-    this._bag = (T[])new Object[DEFAULT_CAPACITY];
+    this._bag = (T[])new Object[capacity];
     this._count = 0;
-    this._currentCapacity = DEFAULT_CAPACITY;
+    this._capacity = capacity;
   }
 
-  private boolean _allocateMoreSpace(){
-    if(this._currentCapacity == MAX_CAPACITY){
-      return false;
-    }
-    T[] _temp = (T[])new Object[this._currentCapacity + DEFAULT_CAPACITY];
-    System.arraycopy(this._bag, 0, _temp, 0, this._currentCapacity);
-    this._currentCapacity += DEFAULT_CAPACITY;
-    this._bag = _temp;
-
-    return true;
-  }
 
   // Tests
   public static void main(String args[]){
@@ -197,18 +181,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
       throw new RuntimeException("I just cleared but the array is not empty");
     }
 
-    // bag resizing - only doing an i-count to prevent infinite loops
-    int i = 0;
-    while(ab.add(yolo) && i < ab.MAX_CAPACITY + 5){ i++; }
-    yolos = ab.toArray();
-    if(yolos.length > ab.MAX_CAPACITY){
-      throw new RuntimeException("I was able to add " + yolos.length + " yolos when max is " + ab.MAX_CAPACITY);
-    }
-
-    // I should have 1000 of them
-    if(ab.getCurrentSize() != ab.MAX_CAPACITY){
-      throw new RuntimeException("I put max cap in, got not max cap");
-    }
+  
 
     System.out.println("Woot. Completed Arraybag tests");
 

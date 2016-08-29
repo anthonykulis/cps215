@@ -1,4 +1,4 @@
-package data_structures.bags;
+package assignments.one;
 
 
 public final class ArrayBag<T> implements BagInterface<T> {
@@ -9,7 +9,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
   private int _currentCapacity = 25;
 
   public ArrayBag(){
-    this._buildInternalArray(DEFAULT_CAPACITY);
+    this._buildInternalArray();
   }
 
   public int getCurrentSize(){
@@ -71,7 +71,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
   }
 
   public void clear(){
-    this._buildInternalArray(DEFAULT_CAPACITY);
+    this._buildInternalArray();
   }
 
   public int contains(T item){
@@ -99,7 +99,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
     return this._currentCapacity == this._count;
   }
 
-  private void _buildInternalArray(int capacity){
+  private void _buildInternalArray(){
     this._bag = (T[])new Object[DEFAULT_CAPACITY];
     this._count = 0;
     this._currentCapacity = DEFAULT_CAPACITY;
