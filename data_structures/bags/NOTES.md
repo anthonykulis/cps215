@@ -111,7 +111,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
 
 ```java
 // the bag itself
-private final T[] _bag;
+private T[] _bag;
 
 // the count of items in the bag
 private int _countOfItems;
@@ -193,31 +193,39 @@ public T remove(){
 
 ```java
 public void clear(){
-  this(DEFAULT_CAPACITY);
+  // DUPLICATE???? Make declarative then!
+  T[] bag = (T[])new Object[capacity];
+  this._bag = bag;
+  this._countOfItems = 0;
 }
 ```
 
 * Implement `contains(T item)`
 
 ```java
-public boolean contains(T item){
+public int contains(T item){
 
-  int itemsRemaining = this._countOfItems;
-
-  while(itemsRemaining){
-    if(item.equals(this._bag[itemsRe])){
-      return true;
-    }
-    itemsRemaining--;
+  if(this.isEmpty()){
+    return -1;
   }
 
-  return false;
+  int index = 0;
+  while (index < _count && !item.equals(this._bag[index])){
+    index++;
+  }
+
+  // if the index reached count, that means we never found the item
+  if(index == _count){
+    return -1;
+  }
+  return index;
+}
 }
 ```
 
 * Implement `toArray()`
   * Question: What is better to return reference or clone? And why?
-  
+
 ```java
 public T[] toArray(){
   return this._bag.clone();
