@@ -10,7 +10,7 @@
 * We should overload `push` to accept an array of type `<T>`
 
 ### Pop *n* items
-* We should overload `pop` to accept *n* of type `int` to then pop and return and array of *n* length
+* We should overload `pop` to accept *n* of type `int` and return and array of *n* length
 
 ### Hints
 * Be declarative!
