@@ -51,7 +51,7 @@ public class NodeStack<T> implements StackInterface<T>{
     T item  = this.pop();
     int position = 0;
 
-    while(item != null && position < numberOfItems){
+    while(position < numberOfItems && item != null){
       items[position] = item;
       position++;
       item = this.pop();
