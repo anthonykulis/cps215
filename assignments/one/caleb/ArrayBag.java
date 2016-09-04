@@ -43,6 +43,9 @@ public final class ArrayBag<T> implements BagInterface<T> {
 
       Now you just ended the program on them. Refactor and ALWAYS use the
       return type you promised.
+      
+      If there was an issue that the application had to stop, you would throw a custom 
+      exception and let them catch it and handle that. 
     */
     if(_bag.length == MAX_CAPACITY){
       System.out.println("Bag reached max capacity of 1000.");
@@ -232,7 +235,7 @@ public static void main(String args[]){
 
         The easier way to handle this...
 
-          while(nb.add("a") != null);
+          while(nb.add("a"));
           if(nb.getCurrentSize() > 1000){
             throw new RuntimeException("...")
           }
