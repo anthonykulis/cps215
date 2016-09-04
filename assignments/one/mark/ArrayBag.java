@@ -220,7 +220,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
           also think you could have reduced this to 2 very easy tests.
 
           // for auto-grow and max capacity - im omitting infinte loop blocking found on my solution
-          while(ab.add("dog") != null);
+          while(ab.add("dog"));
           if(ab.getCurrentSize() > 1000){
             throw new RuntimeException("...");
           }
