@@ -52,7 +52,8 @@ public final class ArrayBag<T> implements BagInterface<T> {
 
     T foundItem = this._bag[index];
     this._bag[index] = null;
-
+    this._count--;
+    
     // combine into a new array
     T[] _temp = (T[])new Object[this._currentCapacity];
 
@@ -64,8 +65,6 @@ public final class ArrayBag<T> implements BagInterface<T> {
 
     // drop the old one in favor of the new one
     this._bag = _temp;
-
-    this._count--;
 
     return foundItem;
   }
