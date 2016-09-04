@@ -25,6 +25,12 @@ public final class ArrayBag<T> implements BagInterface<T> {
       this(DEFAULT_CAPACITY);
    }
 
+   /*
+    Instructor notes:
+    You do not need this. We are auto-growing the array and
+    hence encapsulating this logic. Also, if the user sends 1001,
+    we break our rules. For next time, this could qualify as a refactor bonus.
+   */
    public ArrayBag(int capacity){
     // @SuppressWarnings("unchecked");
       this._buildInternalArray(capacity);
@@ -181,7 +187,8 @@ public final class ArrayBag<T> implements BagInterface<T> {
       your code is not correct. I brought this concept up in class. The idea is for
       scalabilty. As you add to the class, and if this code has already been released, we
       are promising to our customers that it works *this* way. When you change the tests,
-      you change the promise.
+      you change the promise, which could break our clients production applications,
+      assuming we had any.
 
       Now adding to the tests is totally reasonable. Since you are adding two pieces of
       functionality (auto-grow w/ MAX_CAPACITY and removing null pointers in the array),

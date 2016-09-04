@@ -11,6 +11,12 @@ public final class ArrayBag<T> implements BagInterface<T> {
     this(DEFAULT_CAPACITY);
   }
 
+  /*
+   Instructor notes:
+   You do not need this. We are auto-growing the array and
+   hence encapsulating this logic. Also, if the user sends 1001,
+   we break our rules. For next time, this could qualify as a refactor bonus.
+  */
   public ArrayBag(int capacity){
     // @SuppressWarnings("unchecked");
     this._buildInternalArray(capacity);
@@ -224,6 +230,15 @@ public static void main(String args[]){
         while loop and add until it stops you. Then check to see if you have MAX_CAPACITY.
         That proves add and the limiter both work.
 
+        The easier way to handle this...
+
+          while(nb.add("a") != null);
+          if(nb.getCurrentSize() > 1000){
+            throw new RuntimeException("...")
+          }
+
+        That covers both the auto-grow and the 1000 limiter.
+
       2) Remove null cells upon remove.
         - easist way to handle this is from an empty array.
         - add("myString") 2x or something similar.
@@ -232,6 +247,14 @@ public static void main(String args[]){
           - if you want a sanity check, add("dog"), add("cat"), remove dog, you
             should only have cat.
 
+            nb.add("dog")
+            nb.add("cat")
+            nb.remove("dog")
+            Object[] arr = nb.toArray()
+            if(arr[0] == null || !arr[0].equals("cat")){
+              throw new RuntimeException("...");
+            }
+            
       You need to test both of those
     */
 
