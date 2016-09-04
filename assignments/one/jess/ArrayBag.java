@@ -47,12 +47,13 @@ public final class ArrayBag<T> implements BagInterface<T> {
          /*
           Instructor notes:
           Dont leave commented logic in your code. If for some reason
-          you have a tought process you want to put on hold, that is
+          you have a thought process you want to put on hold, that is
           where git comes into play. Long story short, git will allow
           us to "branch" our ideas off the main source file. Once we complete
-          that idea, we then "merge" our idea back into the main source. FYI,
-          I will make you refactor these out on subsequent submissions (pet peive lol!!!!)
-
+          that idea, we then "merge" our idea back into the main source. Obviously
+          that git merging is not required for class, buy you hopefully understand now why 
+          I would want that remove. FYI, I will make you refactor these out on subsequent 
+          submissions (pet peive lol!!!!)
          */
          //return false;
       }
@@ -222,7 +223,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
         Instructor notes:
         The easier way to handle this...
 
-          while(nb.add("a") != null);
+          while(nb.add("a"));
           if(nb.getCurrentSize() > 1000){
             throw new RuntimeException("...")
           }
