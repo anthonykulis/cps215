@@ -166,7 +166,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
 
    /*
     Instructor notes:
-    This creates a new array in scope only. Once this method exists,
+    This creates a new array in scope only. Once this method exits,
     we are still at the original size of 25.
    */
    private void _allocateMoreSpace() {
@@ -188,7 +188,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
       scalabilty. As you add to the class, and if this code has already been released, we
       are promising to our customers that it works *this* way. When you change the tests,
       you change the promise, which could break our clients production applications,
-      assuming we had any.
+      assuming we had any clients.
 
       Now adding to the tests is totally reasonable. Since you are adding two pieces of
       functionality (auto-grow w/ MAX_CAPACITY and removing null pointers in the array),
@@ -197,7 +197,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
       The simplest way to handle those tests:
 
       // with no infinite loop sanity check
-      while(bag.add("dog") != null);
+      while(!bag.add("dog"));
       if(bag.getCurrentSize() > 1000){
         throw new RuntimeException("...");
       }
