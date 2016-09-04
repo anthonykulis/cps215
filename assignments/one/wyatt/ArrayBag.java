@@ -197,7 +197,7 @@ public final class ArrayBag<T> implements BagInterface<T> {
       The simplest way to handle those tests:
 
       // with no infinite loop sanity check
-      while(!bag.add("dog"));
+      while(bag.add("dog"));
       if(bag.getCurrentSize() > 1000){
         throw new RuntimeException("...");
       }
