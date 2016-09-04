@@ -99,7 +99,7 @@ public class Node<T>{
 }
 ```
 
-### Node Implementation
+### [Node Implementation](../nodes/)
 
 #### Constructors
 ```java
@@ -208,6 +208,7 @@ public void push(T item){
 * Since we are encapsulating `Node`, we need to perform the `getData()` method on it before we return the value.
 ```java
 public T pop(){
+  if(this._top == null){ return null; }
   Node<T> n = this._top;
   this._top = n.next();
   return (T)n.getData();
@@ -218,6 +219,7 @@ public T pop(){
 * Simply return the data sitting on top of the stack
 ```java
 public T peek(){
+  if(this._top == null){ return null; }
   return (T)this._top.getData();
 }
 ```
