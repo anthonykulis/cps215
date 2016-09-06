@@ -80,14 +80,15 @@ public NodeQueue(){
 
 ```java
 public void push(T item){
-  Node<T> back;
+  Node<T> back = new Node<>();
+  back.setData(item);
+
   if(this.isEmpty()){
-    back = new Node<>();
-    back.setData(item);
     this._front = back;
   } else {
-    this._back.link(front);
+    this._back.link(back);
   }
+
   this._back = back;
 }
 ```
@@ -109,7 +110,7 @@ public T shift(){
 
 ```java
 public T peek(){
-  if(this._top == null){
+  if(this._front == null){
     return null;
   }
 
@@ -121,11 +122,11 @@ public T peek(){
 
 ```java
 public boolean isEmpty(){
-  return this._top == null;
+  return this._front == null;
 }
 
 public void clear(){
-  this._top = null;
+  this._front = null;
   this._back = null;
 }
 ```
