@@ -3,19 +3,20 @@ package labs.one.util;
 public class Job {
   private int _timeToComplete;
   private String _name;
+  private int _timeRemaining;
 
   public Job(String name, int timeToComplete){
     this._name = name;
-    this._timeToComplete = timeToComplete;
+    this._timeToComplete = this._timeRemaining = timeToComplete;
   }
 
   public String getName(){ return this._name; }
 
-  public int getTimeLeft(){ return this._timeToComplete; }
+  public int getTimeLeft(){ return this._timeRemaining; }
 
   public void doWork(){
     if(this._timeToComplete == 0){ return; }
-    this._timeToComplete--;
+    this._timeRemaining--;
   }
 
   public String toString(){
