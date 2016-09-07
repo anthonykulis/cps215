@@ -46,7 +46,7 @@ Note: If that same job came in and there was already a job in medium that is tak
 Finally, you **only** promote jobs from lower to higher priority queues **only after** the incoming jobs have been scheduled.
 
 ## Receiving Jobs
-I provide a `JobReader` class to read the next ***GROUP*** of jobs. This may be 1 job, it may be 2 jobs, it may be 1 million jobs. It will come in the form of a queue holding type `Job` and you will have to shift out each of those jobs and put them in their appropriate queue. For simplicity sake, you will always have a group of jobs coming in a steady stream. This means no group of jobs, then no jobs, then jobs again. Once the jobs stop, you can stop reading from the JobReader class.
+I provide a `JobReader` class to read the next ***GROUP*** of jobs. This may be 1 job, it may be 2 jobs, it may be 1 million jobs. It will come in the form of a queue holding type `Job` and you will have to shift out each of those jobs and put them in their appropriate queue. For simplicity sake, you will always have a group of jobs coming in a steady stream. This means that it will never give a group of jobs, then no jobs, then jobs again. Once the jobs stop, you can stop reading from the JobReader class.
 
 
 ```java
