@@ -34,6 +34,8 @@ public class Job {
 ## Queue Priorities
 You will have 3 queues you have to manage, a *high*, *medium*, and *low* priority. Jobs with the name `a` will always come into the system and be placed into the highest priority queue. Jobs with the name `b` will come into the system and always initially be placed in the medium priority queue. And finally, jobs with the name `c` will come into the system and be initially placed into lowest priority queue.
 
+**ONLY THE HIGHEST PRIORITY QUEUE MAY DO WORK**
+
 ### Promoting the job in the queue
 * Highest priority jobs will never be promoted.
 * Medium priority jobs will be promoted to high priority jobs after 3 ticks of the system or if the highest priority queue is empty.
