@@ -9,7 +9,7 @@ Alternatively, if the 2nd highest priority queue is empty, you may move an item 
 
 To complicate things, if an item has been sitting in the front of the queue too long, you may move that item into a higher level priority queue.
 
-Finally, to keep it very interesting, jobs may or may not come. As they do come in, you must prioritize them into the work queues.
+Finally, to keep it very interesting, jobs not come all at once. As they do come in, you must prioritize them into the work queues.
 
 ## Rules
 I will provide the file structure to run your program. You **must** follow that file structure. Your driver is already named, packaged, and imports the **only** custom made classes you may use. Of course, if you need to import Java SDK classes, you may, but they may not be from the JCF.
