@@ -12,10 +12,10 @@ public class Job {
 
   public String getName(){ return this._name; }
 
-  public int getTimeLeft(){ return this._timeRemaining; }
+  public boolean isDone(){ return this._timeRemaining == 0; }
 
   public void doWork(){
-    if(this._timeToComplete == 0){ return; }
+    if(this.isDone()){ return; }
     this._timeRemaining--;
   }
 
