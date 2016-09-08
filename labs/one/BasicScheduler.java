@@ -120,6 +120,10 @@ public class BasicScheduler {
 
         /* pushing into the medium priority queue - 2pt */
         this.medium.push(j);
+
+        /* reset the low tick */
+        this.lowTick = 0;
+
         return true;
       }
     }
@@ -141,6 +145,10 @@ public class BasicScheduler {
 
         /* pushing into the medium priority queue - 2pt */
         this.high.push(j);
+
+        /* reset the tick */
+        this.mediumTick = 0;
+
         return true;
       }
     }
@@ -151,7 +159,7 @@ public class BasicScheduler {
   void promoteMediumToHighOnWait(){
 
     /* modulating (or reseting) ticker so it only works every 3 - 2pts */
-    if(this.mediumTick % 3 == 0){
+    if(this.mediumTick == 3){
 
       /* shifting out - 2pts */
       Job j = this.medium.shift();
@@ -162,6 +170,7 @@ public class BasicScheduler {
         /* pushing into higher - 2pts */
         this.high.push(j);
       }
+
     }
 
     /* incrementing your ticker - 1pt */
@@ -172,7 +181,7 @@ public class BasicScheduler {
   void promoteLowToMediumOnWait(){
 
     /* modulating (or reseting) ticker so it only works every 5 - 2pts */
-    if(this.lowTick % 5 == 0){
+    if(this.lowTick == 5){
 
       /* shifting out - 2pts */
       Job j = this.low.shift();
