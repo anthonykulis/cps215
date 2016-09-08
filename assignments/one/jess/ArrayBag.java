@@ -1,4 +1,4 @@
-package assignments.one;
+package assigments.one;
 
 
 public final class ArrayBag<T> implements BagInterface<T> {
@@ -12,12 +12,6 @@ public final class ArrayBag<T> implements BagInterface<T> {
       this(DEFAULT_CAPACITY);
    }
 
-   /*
-    Instructor notes:
-    You do not need this. We are auto-growing the array and
-    hence encapsulating this logic. Also, if the user sends 1001,
-    we break our rules. For next time, this could qualify as a refactor bonus.
-   */
    public ArrayBag(int capacity){
       // @SuppressWarnings("unchecked");
       this._buildInternalArray(capacity);
@@ -33,29 +27,8 @@ public final class ArrayBag<T> implements BagInterface<T> {
    }
 
    public boolean add(T item){
-      if(this._isArrayFull() && this._capacity <= MAX_CAPACITY){
-
-        /*
-          Instructor notes:
-          Your return type of _allocateMoreMemory() is type T[].
-          You dont catch and assign that. This breaks your code.
-          For the 25pts you will need to assign that correctly.
-        */
-         this._allocateMoreMemory();
-
-
-         /*
-          Instructor notes:
-          Dont leave commented logic in your code. If for some reason
-          you have a thought process you want to put on hold, that is
-          where git comes into play. Long story short, git will allow
-          us to "branch" our ideas off the main source file. Once we complete
-          that idea, we then "merge" our idea back into the main source. Obviously
-          that git merging is not required for class, buy you hopefully understand now why 
-          I would want that remove. FYI, I will make you refactor these out on subsequent 
-          submissions (pet peive lol!!!!)
-         */
-         //return false;
+      if(this._isArrayFull() && this._getMoreMemory()){
+         return false;
       }
 
       this._bag[this._count] = item;
@@ -86,19 +59,12 @@ public final class ArrayBag<T> implements BagInterface<T> {
       T foundItem = this._bag[index];
       this._bag[index] = null;
 
-      /*
-        Instructor notes:
-        Your copies look perfect but can be cleaned up.
-        Your `this._count--;` should be brought up to before this
-        copy. Then in your second arraycopy you could give it a length
-        of this.getCurrentSize() - index and be perfect readable.
-        This normally would qualify for a refactor.
-      */
-      this._bag = (T[]) new Object[_bag.length];
-      System.arraycopy(_bag, 0, this._bag, 0, index);
-      System.arraycopy(_bag, index+1, this._bag, index, _bag.length-index-1);
+      T[] _temp = (T[])new Object[this._capacity];
+      System.arraycopy(_bag, 0, _temp, 0, index);
+      System.arraycopy(_bag, index+1, _temp, index, _bag.length-index-1);
 
       this._count--;
+      this._bag = _temp;
 
       return foundItem;
    }
@@ -137,19 +103,24 @@ public final class ArrayBag<T> implements BagInterface<T> {
       this._count = 0;
    }
 
+
    /*
-    Instructor notes:
-    There is nothing wrong with this, but I would call for a refactor on
-    this. The reason being is the method name starts with _allocate and not _get.
-    Allocate hints that the developer using your library doesn't need to manage
-    the memory. I would return a boolean. Then where you check to see if it full
-    in your add method, I would move that into this method. That way if it is full,
-    you return false.
+    Instructors notes:
+    You return true when you cannot "getMoreMemory" and
+    return false when you can. This doesn't make sense. If
+    there was refactoring available, you'd have to switch this out.
    */
-   private T[] _allocateMoreMemory(){
-      this._bag = (T[]) new Object[_bag.length + DEFAULT_CAPACITY];
-      System.arraycopy(_bag, 0, this._bag, 0, _bag.length);
-      return this._bag;
+   private boolean _getMoreMemory(){
+      if(this._capacity == MAX_CAPACITY){
+         return true;
+      }
+
+      T[] _temp = (T[])new Object[this._capacity + DEFAULT_CAPACITY];
+      System.arraycopy(this._bag, 0, _temp, 0, this._bag.length);
+      this._capacity += DEFAULT_CAPACITY;
+      this._bag = _temp;
+
+      return false;
    }
 
    // Tests
@@ -202,6 +173,22 @@ public final class ArrayBag<T> implements BagInterface<T> {
          throw new RuntimeException("I removed yolo, got yolo back, know its not in the bag, got a size not 0");
       }
 
+      String dog = "Dog";
+      String cat = "Cat";
+      ab.add(dog);
+      ab.add(cat);
+      ab.add(dog);
+      ab.remove(cat);
+
+      if(ab.getCurrentSize() != 2){
+         throw new RuntimeException("I had three, removed the middle one, have length 3");
+      }
+      Object[] dogs = ab.toArray();
+
+      if(!(dogs[0].equals("Dog") && dogs[1].equals("Dog"))){
+         throw new RuntimeException("I removed the cat. We should have only dogs. We have something besides dogs");
+      }
+
       ab.add(yolo);
 
       if(ab.contains(yolo) == -1){
@@ -219,62 +206,17 @@ public final class ArrayBag<T> implements BagInterface<T> {
          throw new RuntimeException("I just cleared but the array is not empty");
       }
 
-      /*
-        Instructor notes:
-        The easier way to handle this...
+      int i = 0;
+    while(ab.add(yolo) && i < ab.MAX_CAPACITY + 5){ i++; }
+    yolos = ab.toArray();
+    if(yolos.length > ab.MAX_CAPACITY){
+      throw new RuntimeException("I was able to add " + yolos.length + " yolos when max is " + ab.MAX_CAPACITY);
+    }
 
-          while(nb.add("a"));
-          if(nb.getCurrentSize() > 1000){
-            throw new RuntimeException("...")
-          }
-
-        That covers both the auto-grow and the 1000 limiter.
-
-        You also need to test for the null removal on remove(T item). But since
-        that code is correct, I would only call for a refactor on that. To test it,
-        start with an empty bag. If you want a sanity check to go along with it (for you not me),
-
-          nb.add("dog")
-          nb.add("cat")
-          nb.remove("dog")
-          Object[] arr = nb.toArray()
-          if(arr[0] == null || !arr[0].equals("cat")){
-            throw new RuntimeException("...");
-          }
-      */
-      ArrayBag<String> nb = new ArrayBag<>();
-
-      nb.add("a");
-      nb.add("b");
-      nb.add("c");
-      nb.add("d");
-      nb.add("e");
-      nb.add("f");
-      nb.add("g");
-      nb.add("h");
-      nb.add("i");
-      nb.add("j");
-      nb.add("k");
-      nb.add("l");
-      nb.add("m");
-      nb.add("n");
-      nb.add("o");
-      nb.add("p");
-      nb.add("q");
-      nb.add("r");
-      nb.add("s");
-      nb.add("t");
-      nb.add("u");
-      nb.add("v");
-      nb.add("w");
-      nb.add("x");
-      nb.add("y");
-
-      if(!nb.add(new String("z"))){
-         throw new RuntimeException("I tried to add a 26th element but got rejected");
-      }
-
-
+    // I should have 1000 of them
+    if(ab.getCurrentSize() != ab.MAX_CAPACITY){
+      throw new RuntimeException("I put max cap in, got not max cap. I got "+ ab.getCurrentSize());
+    }
 
 
 
