@@ -37,7 +37,9 @@ public class NodeStack<T> implements StackInterface<T>{
     if(this._top == null){ return null; }
     Node<T> n = this._top;
     this._top = n.next();
-    return (T)n.getData();
+    T data = (T)n.getData();
+    n.clearData();
+    return data;
   }
 
   public T peek(){
