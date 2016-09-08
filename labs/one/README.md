@@ -25,7 +25,7 @@ package labs.one.util;
 public class Job {
   public Job(String name, int timeToComplete);
   public String getName();
-  public int getTimeLeft();
+  public boolean isDone();
   public void doWork();
   public String toString();
 }

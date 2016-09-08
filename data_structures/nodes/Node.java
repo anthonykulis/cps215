@@ -35,6 +35,8 @@ public class Node<T>{
     this._data = item;
   }
 
+  public void clearData(){ this._data = null; }
+
   public static void main(String args[]){
     String[] numbers = {"One", "Two"};
     Node<String> two = new Node<>();
