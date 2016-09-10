@@ -1,248 +1,224 @@
 package assignments.one;
 
 public class ArrayBag<T> implements BagInterface<T> {
+   private  T[] _bag;
+   private int _count;
+   private static final int DEFAULT_CAPACITY = 25;
+   private int _capacity;
+   private static final int _maxCapacity=1000;
 
-  /*
+   public ArrayBag(){
+      this._buildInternalArray();
+   }
+
+   public int getCurrentSize(){
+      return this._count;
+   }
+
+   public boolean isEmpty(){
+      return this._count == 0;
+   }
+
+   public boolean add(T item){
+      /*
+        Instructor notes:
+        Spend time putting spaces in your code. The point of
+        writing code (besides the obvious) is to allow for others
+        to come into your work later and modify or update it.
+        You want to make it readable.
+      */
+      if(this._isArrayFull()&&!_allocateMoreSpace()){
+         return false;
+      }
+
+      this._bag[this._count] = item;
+
+      this._count++;
+
+      return true;
+   }
+
+   public T remove(){
+      if(this.isEmpty()){
+         return null;
+      }
+
+      T item = this._bag[this._count - 1];
+      this._bag[_count] = null;
+      this._count--;
+
+      return item;
+   }
+
+   public T remove(T item){
+      int index = contains(item);
+      if(index == -1){
+         return null;
+      }
+
+      T foundItem = this._bag[index];
+      this._bag[index] = null;
+      this._count--;
+
+      T[] tempBag=(T[])new Object[this._capacity];
+      System.arraycopy(this._bag, 0, tempBag, 0, this._capacity);
+      System.arraycopy(this._bag, index+1, tempBag, index, this.getCurrentSize()-index);
+      this._bag=tempBag;
+
+
+
+      return foundItem;
+   }
+
+   public void clear(){
+      this._buildInternalArray(this._capacity);
+   }
+
+   public int contains(T item){
+      if(this.isEmpty()){
+         return -1;
+      }
+
+      int index = 0;
+      while (!item.equals(this._bag[index]) && index < _count){
+         index++;
+      }
+
+      // if the index reached count, that means we never found the item
+      if(index == _count){
+         return -1;
+      }
+      return index;
+   }
+
+   public T[] toArray(){
+      return this._bag.clone();
+   }
+
+   private boolean _isArrayFull(){
+      return this._capacity == this._count;
+   }
+
+   private void _buildInternalArray(){
+      this._bag = (T[])new Object[DEFAULT_CAPACITY];
+      this._count = 0;
+   }
+
+   /*
     Instructor notes:
-    Bag has a maximum capacity.
-    This is not defined in your member variables.
-  */
-
-  private  T[] _bag;
-  private int _count;
-  private static final int DEFAULT_CAPACITY = 25;
-  private int _capacity;
-
-  public ArrayBag(){
-    this(DEFAULT_CAPACITY);
-  }
-
-  /*
-    Instructors notes:
-    This constructor is to be removed as per requirements
-  */
-  public ArrayBag(int capacity){
-    // @SuppressWarnings("unchecked");
-    this._buildInternalArray(capacity);
-    this._capacity = capacity;
-  }
-
-  public int getCurrentSize(){
-    return this._count;
-  }
-
-  public boolean isEmpty(){
-    return this._count == 0;
-  }
-
-  public boolean add(T item){
-
-  /*
-    Instuctors Notes:
-    When checking if array is full,
-    you automatically allocate more space.
-    If the bag has reached maximum capacity,
-    as per this if block, you will continue adding.
-
-    Hence, it would be broken (array out of bounds)
-
-  */
-	if(this._isArrayFull()){
-      _allocateMoreSpace();
-    }
-
-    this._bag[this._count] = item;
-
-    this._count++;
-
-    return true;
-  }
-
-  public T remove(){
-    if(this.isEmpty()){
-      return null;
-    }
-
-    T item = this._bag[this._count - 1];
-    this._bag[_count] = null;
-    this._count--;
-
-    return item;
-  }
-
-  public T remove(T item){
-    int index = contains(item);
-    if(index == -1){
-      return null;
-    }
-
-    T foundItem = this._bag[index];
-    this._bag[index] = null;
+    Again, spaces plese. Use them! Make your code
+    easily readable for the next guy. The goal is
+    to "wow" the next reader. In the long run it pays
+    off because you will have a boss looking at it and
+    she might say "hmm. Is Gabe lazy? Maybe I dont want to give
+    him that raise, or at least not as much as I though". No point
+    in risking that. Remember, this is published work, others
+    will read it. Give them the best impression.
+   */
+   public boolean _allocateMoreSpace(){
+      if(_capacity==_maxCapacity){
+         return false;
+      }
+      else{
+         T[] tempBag=(T[])new Object[_capacity+DEFAULT_CAPACITY];
+         System.arraycopy(_bag, 0, tempBag, 0, _capacity);
+         this._capacity+=DEFAULT_CAPACITY;
+         this._bag=tempBag;
+         return true;
+      }
+   }
 
 
-    /*
-      Instructor notes:
+   // Tests
+   public static void main(String args[]){
 
-      In your first arraycopy, you copy the entire contents. This is incorrect.
+      ArrayBag<String> ab = new ArrayBag<>();
+      if(ab.getCurrentSize() != 0){
+         throw new RuntimeException("Just initialized and it has size");
+      }
 
-      In your second arraycopy, your length is off by one. You copy 1 element too many.
-      Also, when accessing member variables or member methods, refactor to use the this keyword.
+      if(!ab.isEmpty()){
+         throw new RuntimeException("Just initialized and its not empty");
+      }
 
-    */
-    T[] tempBag=(T[])new Object[_capacity];
-    System.arraycopy(_bag, 0, tempBag, 0, _capacity);
-    System.arraycopy(_bag, index+1, tempBag, index, getCurrentSize()-index);
-    this._bag=tempBag;
+      if(!ab.add(new String("yolo"))){
+         throw new RuntimeException("I tried to add to an empty bag and got rejected");
+      }
 
-    this._count--;
+      String yolo = ab.remove();
+      if(yolo == null){
+         throw new RuntimeException("Got returned null when I expected yolo");
+      }
 
-    return foundItem;
-  }
+      if(!yolo.equals("yolo")){
+         throw new RuntimeException("expected yolo got " + yolo);
+      }
 
-  public void clear(){
-    this._buildInternalArray(this._capacity);
-  }
+      ab.add(yolo);
 
-  public int contains(T item){
-    if(this.isEmpty()){
-      return -1;
-    }
+      yolo = ab.remove(yolo);
+      if(yolo == null){
+         throw new RuntimeException("Added yolo back and tried to find it. That didn't work");
+      }
 
-    int index = 0;
-    while (!item.equals(this._bag[index]) && index < _count){
-      index++;
-    }
+      if(!yolo.equals("yolo")){
+         throw new RuntimeException("That yolo i got... not yolo but " + yolo);
+      }
 
-    // if the index reached count, that means we never found the item
-    if(index == _count){
-      return -1;
-    }
-    return index;
-  }
+      if(ab.contains(yolo) > -1){
+         throw new RuntimeException("Went to see if yolo still was there. It was. But I removed it");
+      }
 
-  public T[] toArray(){
-    return this._bag.clone();
-  }
+      if(ab.getCurrentSize() != 0){
+         throw new RuntimeException("I removed yolo, got yolo back, know its not in the bag, got a size not 0");
+      }
 
-  private boolean _isArrayFull(){
-    return this._capacity == this._count;
-  }
+      ab.add(yolo);
 
-  private void _buildInternalArray(int capacity){
-    this._bag = (T[])new Object[capacity];
-    this._count = 0;
-  }
+      if(ab.contains(yolo) == -1){
+         throw new RuntimeException("I added yolo back, looked for it in contains, couldnt find it");
+      }
 
-  /*
-    Instructor notes:
+      Object[] yolos = ab.toArray();
 
-    1) Tabs matter. Use them. Refactor appropriately.
+      ab.clear();
 
-    2) The 1000 you use is arbitrary. Why are we using it? Since
-    I did require a maximum capacity and that is what I assume you are referencing,
-    use the appropriate constant.
+      if(!ab.isEmpty()){
+         throw new RuntimeException("I just cleared but the array is not empty");
+      }
 
-    3) You are only allocating more space if the size is greater than 1000. The assingment
-    calls for allocating more space when the array is full up to a maximum of 1000. This
-    means your logic is incorrect and needs to be fixed. Futhermore, think about what happens
-    when we hit 1000. How do we want to handle that?
+      String test="test";
+      int i;
+      while(ab.add(test)&& i<ab._maxCapacity+5){
+         i++;
+      }
 
-    4) You do not print statements in libraries. If I am running a GUI application how on earth
-    would I know you printed to the terminal? You need to handle that different. I would not suggest
-    throwing a runtime error for this class. You can simply return a boolean.
-  */
-  public void _allocateMoreSpace(){
-	if(_bag.length>1000){
-		T[] tempBag=(T[])new Object[_capacity+DEFAULT_CAPACITY];
-		System.arraycopy(_bag, 0, tempBag, 0, _capacity);
-		this._capacity+=DEFAULT_CAPACITY;
-		this._bag=tempBag;
-	}
-   else
-      System.out.println("At maximum capacity");
-  }
+      yolos=ab.toArray();
+      if(yolos.length>ab._maxCapacity){
+         throw new RuntimeException("Array was filled more than max capacity");
+      }
 
-  /*
-    Instructor notes:
+      if(ab.getCurrentSize()!=ab._maxCapacity){
+         throw new RuntimeException("Array does not have max capacity");
+      }
 
-    You did not write any tests. You need to write tests for checking
-    the auto-grow functionality, the max capacity, and the null case in
-    remove(T item)l
+      ab.clear();
+      String one="one";
+      String two="two";
+      String three="three";
 
-    You will also notice that when you remove the superfluous constructor some tests
-    I have written will not be needed.
+      ab.add(one);
+      ab.add(two);
+      ab.add(three);
+      ab.remove(three);
 
-    Please write and update those tests.
-  */
-  
-  // Tests
-  public static void main(String args[]){
+      if(ab.getCurrentSize()!=2){
+         throw new RuntimeException("Removed one from three, should have 2");
+      }
 
-    ArrayBag<String> hugeCap = new ArrayBag<>(1000);
-    Object[] hc = hugeCap.toArray();
-    if(hc.length != 1000){
-      throw new RuntimeException("I made a bag with a capacity of 1000 and its " + hc.length);
-    }
 
-    ArrayBag<String> ab = new ArrayBag<>();
-    if(ab.getCurrentSize() != 0){
-      throw new RuntimeException("Just initialized and it has size");
-    }
 
-    if(!ab.isEmpty()){
-      throw new RuntimeException("Just initialized and its not empty");
-    }
+      System.out.println("Woot. Completed Arraybag tests");
 
-    if(!ab.add(new String("yolo"))){
-      throw new RuntimeException("I tried to add to an empty bag and got rejected");
-    }
-
-    String yolo = ab.remove();
-    if(yolo == null){
-      throw new RuntimeException("Got returned null when I expected yolo");
-    }
-
-    if(!yolo.equals("yolo")){
-      throw new RuntimeException("expected yolo got " + yolo);
-    }
-
-    ab.add(yolo);
-
-    yolo = ab.remove(yolo);
-    if(yolo == null){
-      throw new RuntimeException("Added yolo back and tried to find it. That didn't work");
-    }
-
-    if(!yolo.equals("yolo")){
-      throw new RuntimeException("That yolo i got... not yolo but " + yolo);
-    }
-
-    if(ab.contains(yolo) > -1){
-      throw new RuntimeException("Went to see if yolo still was there. It was. But I removed it");
-    }
-
-    if(ab.getCurrentSize() != 0){
-      throw new RuntimeException("I removed yolo, got yolo back, know its not in the bag, got a size not 0");
-    }
-
-    ab.add(yolo);
-
-    if(ab.contains(yolo) == -1){
-      throw new RuntimeException("I added yolo back, looked for it in contains, couldnt find it");
-    }
-
-    Object[] yolos = ab.toArray();
-    if(yolos.length != 25){
-      throw new RuntimeException("I expected an array length of 25 and got " + yolos.length);
-    }
-
-    ab.clear();
-
-    if(!ab.isEmpty()){
-      throw new RuntimeException("I just cleared but the array is not empty");
-    }
-
-    System.out.println("Woot. Completed Arraybag tests");
-
-  }
+   }
 }
