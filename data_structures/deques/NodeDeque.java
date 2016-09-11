@@ -59,8 +59,11 @@ public class NodeDeque<T> implements DequeInterface<T> {
       this._front = null;
     }
 
+    T data = (T)n.getData();
+    n.clearData();
+
     // return the data
-    return (T)n.getData();
+    return data;
   }
 
   /*
@@ -83,7 +86,7 @@ public class NodeDeque<T> implements DequeInterface<T> {
 
     this._front = n;
   }
-  
+
   /*
     When shifting, as with popping, we need to unlink the two nodes,
     BOTH directions
@@ -113,7 +116,9 @@ public class NodeDeque<T> implements DequeInterface<T> {
     }
 
     // return our data
-    return (T)n.getData();
+    T data = (T)n.getData();
+    n.clearData();
+    return data;
   }
 
   public T peekFirst(){
@@ -130,4 +135,58 @@ public class NodeDeque<T> implements DequeInterface<T> {
 
   public void clear(){ this._front = this._back = null; }
 
+  public static void main(String[] args){
+    NodeDeque<String> nd = new NodeDeque<>();
+
+    // push
+    nd.push("Middle");
+    nd.push("Back");
+    // unshift
+    nd.unshift("Front");
+
+    // do peeks
+    String peek = (String)nd.peekFirst();
+    if(!peek.equals("Front")){
+      throw new RuntimeException("I peekFirst() and expected `Front`, got " + peek);
+    }
+
+    peek = (String)nd.peekLast();
+    if(!peek.equals("Back")){
+      throw new RuntimeException("I peekLast() and expected `Back`, got " + peek);
+    }
+
+    // if i pop, I should get back then front
+    String back = (String)nd.pop();
+    String middle = (String)nd.pop();
+    String front = (String)nd.pop();
+
+    if(!nd.isEmpty()){
+      throw new RuntimeException("I popped until empty, but its not empty");
+    }
+
+    if(!(back.equals("Back") && front.equals("Front"))){
+      throw new RuntimeException("I pushed `Back`, unshifted `Front`, then popped both, got something unexpected: " + back + "->" + front);
+    }
+
+    // test for shifts
+    nd.push("Back");
+    nd.unshift("Middle");
+    nd.unshift("Front");
+    front = nd.shift();
+    middle = nd.shift();
+    back = nd.shift();
+
+    if(!(back.equals("Back") && front.equals("Front"))){
+      throw new RuntimeException("I pushed `Back`, unshifted `Front`, then shifted both, got something unexpected: " + front + "->" + back);
+    }
+
+    // clear test - see how this is getting repetitive, we should be inheriting this method
+    nd.push("to be cleared");
+    nd.clear();
+    if(!nd.isEmpty()){
+      throw new RuntimeException("I could not clear the deque");
+    }
+
+    System.out.println("Woot. NodeDeque passed tests.");
+  }
 }

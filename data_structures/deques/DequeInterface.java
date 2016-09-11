@@ -5,7 +5,6 @@ public interface DequeInterface<T> {
   public T pop();
   public void unshift(T item);
   public T shift();
-  public T peek();
   public T peekFirst();
   public T peekLast();
   public boolean isEmpty();

@@ -3,6 +3,7 @@ package data_structures.nodes;
 public class DoublyLinkedNode<T> extends Node<T>{
 
   private DoublyLinkedNode _previous;
+  private T _data;
 
   public DoublyLinkedNode(){
     super();
@@ -12,6 +13,12 @@ public class DoublyLinkedNode<T> extends Node<T>{
   public DoublyLinkedNode(T item, DoublyLinkedNode next, DoublyLinkedNode previous){
     super(item, next);
     this.linkPrevious(previous);
+  }
+
+  public DoublyLinkedNode next(){
+    // UGH! Generic class extended, need to manually override what it wants to do
+    // Is this correct approach? I'm not 100% on this.
+    return (DoublyLinkedNode)super.next();
   }
 
   public DoublyLinkedNode previous(){
