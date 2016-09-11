@@ -156,9 +156,10 @@ public class NodeDeque<T> implements DequeInterface<T> {
     }
 
     // if i pop, I should get back then front
-    String back = (String)nd.pop();
-    String middle = (String)nd.pop();
-    String front = (String)nd.pop();
+    String back = nd.pop();
+    String middle = nd.pop();
+    String front = nd.pop();
+    String shouldBeNull = nd.pop();
 
     if(!nd.isEmpty()){
       throw new RuntimeException("I popped until empty, but its not empty");
@@ -168,6 +169,10 @@ public class NodeDeque<T> implements DequeInterface<T> {
       throw new RuntimeException("I pushed `Back`, unshifted `Front`, then popped both, got something unexpected: " + back + "->" + front);
     }
 
+    if(shouldBeNull != null){
+      throw new RuntimeException("I expected a null pop and got: " + shouldBeNull);
+    }
+
     // test for shifts
     nd.push("Back");
     nd.unshift("Middle");
@@ -175,9 +180,14 @@ public class NodeDeque<T> implements DequeInterface<T> {
     front = nd.shift();
     middle = nd.shift();
     back = nd.shift();
+    shouldBeNull =nd.shift();
 
     if(!(back.equals("Back") && front.equals("Front"))){
       throw new RuntimeException("I pushed `Back`, unshifted `Front`, then shifted both, got something unexpected: " + front + "->" + back);
+    }
+
+    if(shouldBeNull != null){
+      throw new RuntimeException("I expected a null shift and got: " + shouldBeNull);
     }
 
     // clear test - see how this is getting repetitive, we should be inheriting this method
