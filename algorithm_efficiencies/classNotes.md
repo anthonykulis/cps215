@@ -89,7 +89,7 @@ for(int i = 1; i <= TOTAL_TIMES; i++){
 
 * What is the *most significant* operation?
 * How many times did we execute the *most significant* operation?
-  * Tricker this time?
+  * Trickier this time?
 
 ### Best, Worst, Average Cases
 * For the above example, the best case was `n * 1`
@@ -109,11 +109,20 @@ for(int i = 1; i <= TOTAL_TIMES; i++){
   * Example:
 
   ```
-  I know from lots of experience that out of 100 students, only 1 to 3 people will submit their assignment on time. In this case, I could, but maybe shouldn't, care only about Best Case.
+  I know from lots of experience that out of 100 students, 
+  only 1 to 3 people will submit their assignment on time. 
+  In this case, I could, but maybe shouldn't, care only about 
+  the Best Case.
 
-  I know from lots of experience that out of 100 students, about 40 to 60 people will submit their assignment on time. In this case, I can optimize for Average Case.
+  I know from lots of experience that out of 100 students, 
+  about 40 to 60 people will submit their assignment on time. 
+  In this case, I can optimize for Average Case.
 
-  I know from lots of experience that out of 100 students, most people, maybe 90 to 95 people will submit their assignment on time. In this case, I can ignore both Best Case and Average Case and focus only on optimizing Worst Case.
+  I know from lots of experience that out of 100 students, 
+  most people, maybe 90 to 95 people will submit their 
+  assignment on time. In this case, I can ignore both 
+  Best Case and Average Case and focus only on optimizing 
+  the Worst Case.
   ```
 
 * In this class, we will only concern ourselves with Worst Case!
