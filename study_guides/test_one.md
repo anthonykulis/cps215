@@ -15,7 +15,7 @@ Big O Notation:
 Limits of stack, deque, queue
 
 Structure types of Stack, Queue, Bag, Deque
-LIFO or FIFO or neither
+* LIFO or FIFO or neither
 
 
 How many items are visible in the Bag, Stack, Queue, Deque
