@@ -4,7 +4,7 @@
 A piece of software can only run as fast as the algorithm will allow. This means a 99 core machine with 50TB of RAM will run as fast in scale as a 1 core machine with 256MB of RAM if the algorithm is inefficient. This is obviously important.
 
 ## Motivation
-* Open your editors and write code to compute the some of 1 to 100000
+* Open your editors and write code to compute the sum of 1 to n
 
 ```java
 public class BadAlgorithmEfficiency {
