@@ -183,7 +183,7 @@ for(int i = 0; i < n; i++) doIt();
 * So for the above, our Big O notations would be:
   * Example 1: `O(nm)`
   * Example 2: `O(2n)` -> `O(n)`
-    * We do not consider constants in computing complexity
+    * In this class, we will not consider constants in computing complexity
   * Example 3: `O(n^2)`
 
 ### Growth Rates
