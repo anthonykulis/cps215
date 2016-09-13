@@ -187,14 +187,15 @@ for(int i = 0; i < n; i++) doIt();
   * Example 3: `O(n^2)`
 
 ### Growth Rates
-**Big O**       **Effect on Time Requirement (Size of n)**
-O(1)            Constant - None
-O(ln)           Logarithmic - Negligible
-O(n)            Linear - The time increases equally proportional to size of *n*
-O(n log n)      "nLogN" - Slows noticeably as *n* increases
-O(n^2)          Polynomial - Explodes on small increases of *n*
-O(n^m)          Polynomial - Explodes faster on larger *m* with smaller *n*
-O(2^n)          Exponential - Explodes immediately
+
+* **Big O**: **Effect on Time Requirement (Size of n)**
+* O(1): Constant - None
+* O(ln): Logarithmic - Negligible
+* O(n): Linear - The time increases equally proportional to size of *n*
+* O(n logn): "nLogN" - Slows noticeably as *n* increases
+* O(n^2): Polynomial - Explodes on small increases of *n*
+* O(n^m): Polynomial - Explodes faster on larger *m* with smaller *n*
+* O(2^n): Exponential - Explodes immediately
 
 * Do not use anything worse than polynomial!!!!!!! EVER!!!!!!!
   * Typically we will resort to AI techniques to solve large *m* polynomials or worse.
