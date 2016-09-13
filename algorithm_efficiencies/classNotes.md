@@ -57,8 +57,8 @@ public class BadAlgorithmEfficiency {
 
 ### What? Aren't efficiency and space diametrically opposed?
 * YES!
-* We sacrifice speed for space.
-  * This is the most important concept to get from this class.
+* We sacrifice speed to save space. We sacrafice space to increase speed.
+  * This is the ***most important concept*** to get from this class.
 * If we have the room and can use the room, make highly efficient algorithms
 * If we are limited on room, evaluate which algorithms can be sacrificed.
 * We call this these two opposing forces
