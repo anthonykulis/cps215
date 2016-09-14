@@ -61,7 +61,7 @@ public class BadAlgorithmEfficiency {
   * This is the ***most important concept*** to get from this class.
 * If we have the room and can use the room, make highly efficient algorithms
 * If we are limited on room, evaluate which algorithms can be sacrificed.
-* We call this these two opposing forces
+* We call these two opposing forces
   * Space Efficiency
   * Time Efficiency
 * This means the *best* algorithm might not be the fastest or the one that uses the least memory.
@@ -96,17 +96,17 @@ for(int i = 1; i <= TOTAL_TIMES; i++){
 * For the above example, the average case was `n * (sumOfN/n)` - dont worry about `sumOfN/n`, just treat is as a real number.
 * For the above example, the worst case was `n * n`
 
-* Is this true? `n * 1 < n * (sumOfN) < n * n`
+* Is this true? `n * 1 <= n * (sumOfN) <= n * n`
   * Using real numbers where `n = 10`,
-    * `10 * 1 < 10 * (55/5) < 10 * 10`
-    * `10 < 55 < 100`
+    * `10 * 1 <= 10 * (55/5) <= 10 * 10`
+    * `10 <= 55 <= 100`
   * So yeah, we are right on.
 
 * So which do we care about?
   * All of them!
   * If we were able to look at the incoming distribution of a set, and we were to know 99% of the time we would get the Best case scenario, then we can argue best case is what we need.
   * Conversely, if we had no idea the incoming distribution of a set, we might want to go with Worst Case.
-  * Example:
+  * Example: Imagine I am developing an algorithm to grade papers...
 
   ```
   I know from lots of experience that out of 100 students, 
@@ -133,7 +133,7 @@ for(int i = 1; i <= TOTAL_TIMES; i++){
     * Average Case is known as `Big Theta`
 
 ### Getting the Big O
-* So know you have probably guessed that loops have a lot to do with Big O evaluation.
+* So now you have probably guessed that loops have a lot to do with Big O evaluation.
   * This should be pretty obvious since it is *how many times* we need to do the most significant operation.
 * But how do we write this notation?
 
@@ -145,6 +145,7 @@ for(int i = 0; i < n; i++){ sum++; }
   * The sum would be incremented `n` times.
   * Our Big O notation would be `O(n)`
     * Realize the obvious, `O()` represents a function in mathematics which is pretty much the same concept as a method in Java.
+      * `f(x) = x + 3`;
 
 * Lets make this a bit more complicated
   * Compute the number of times `sum++` executes
