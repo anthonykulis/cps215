@@ -21,8 +21,8 @@ public class BasicScheduler {
   /* Total 9 pts*/
   public BasicScheduler(){
 
-    /* starting your tickers at 1, 2pt */
-    this.lowTick = this.mediumTick = 1;
+    /* starting your tickers at 0, 2pt */
+    this.lowTick = this.mediumTick = 0;
 
     /* creating your three queues, 6pts */
     this.high = new NodeQueue<>();
@@ -82,7 +82,7 @@ public class BasicScheduler {
   }
 
   /* Total 12 points */
-  void performWork(){
+  Job performWork(){
 
     /* peeking at the only worker - 3pt */
     // only highest priorty does some work
@@ -90,7 +90,7 @@ public class BasicScheduler {
 
     /* checking the worker is not null - 1pt*/
     // empty?
-    if(worker ==  null){ return; }
+    if(worker ==  null){ return null; }
 
     /* calling doWork - 2pts */
     worker.doWork();
@@ -100,32 +100,26 @@ public class BasicScheduler {
     if(worker.isDone()){
 
       /* removing a completed worker - 2pts */
-      this.high.shift();
-
-      /* printing out the toString method, not something else - 2pts */
-      System.out.println("Completed: " + worker.toString());
+      return this.high.shift();
     }
+
+    return null;
   }
 
-  /* Total 6 points */
+  /* Total 5 points */
   boolean promoteLowToEmptyMedium(){
 
     /* checking higher priority queue is empty before shifting - 1pt */
     if(this.medium.isEmpty()){
-      /* shifting the lower priority - 2pt */
-      Job j = this.low.shift();
 
-      /* checking the shift didn't result in null - 1pt */
-      if(j != null){
+      /* pushing into the medium priority queue - 4pt */
+      this._promote(this.low, this.medium);
 
-        /* pushing into the medium priority queue - 2pt */
-        this.medium.push(j);
+      /* reset the low tick */
+      this.lowTick = 0;
 
-        /* reset the low tick */
-        this.lowTick = 0;
+      return true;
 
-        return true;
-      }
     }
 
     return false;
@@ -137,20 +131,14 @@ public class BasicScheduler {
     /* checking higher priority queue is empty before shifting - 1pt */
     if(this.high.isEmpty()){
 
-      /* shifting the lower priority - 2pt */
-      Job j = this.medium.shift();
+      /* pushing into the high priority queue - 4pt */
+      this._promote(this.medium, this.high);
 
-      /* checking the shift didn't result in null - 1pt */
-      if(j != null){
+      /* reset the tick */
+      this.mediumTick = 0;
 
-        /* pushing into the medium priority queue - 2pt */
-        this.high.push(j);
+      return true;
 
-        /* reset the tick */
-        this.mediumTick = 0;
-
-        return true;
-      }
     }
     return false;
   }
@@ -160,21 +148,12 @@ public class BasicScheduler {
 
     /* modulating (or reseting) ticker so it only works every 3 - 2pts */
     if(this.mediumTick == 3){
-
-      /* shifting out - 2pts */
-      Job j = this.medium.shift();
-
-      /* checking for null 1pt */
-      if(j != null){
-
-        /* pushing into higher - 2pts */
-        this.high.push(j);
-      }
-
+      this._promote(this.medium, this.high);
+      this.mediumTick = 1;
+    } else {
+      /* incrementing your ticker - 1pt */
+      this.mediumTick++;
     }
-
-    /* incrementing your ticker - 1pt */
-    this.mediumTick++;
   }
 
   /* Total 8 points */
@@ -182,20 +161,20 @@ public class BasicScheduler {
 
     /* modulating (or reseting) ticker so it only works every 5 - 2pts */
     if(this.lowTick == 5){
-
-      /* shifting out - 2pts */
-      Job j = this.low.shift();
-
-      /* checking for null 1pt */
-      if(j != null){
-
-        /* pushing into higher - 2pts */
-        this.medium.push(j);
-      }
+      this._promote(this.low, this.high);
+      this.lowTick = 0;
+    } else {
+      /* incrementing your ticker - 1pt */
+      this.lowTick++;
     }
+  }
 
-    /* incrementing your ticker - 1pt */
-    this.lowTick++;
+  private void _promote(NodeQueue from, NodeQueue to){
+
+    Job promoted = (Job)from.shift();
+
+    /* checking the shift didn't result in null and pushing - 3pt */
+    if(promoted != null) to.push(promoted);
   }
 
   public static void main(String[] args){
@@ -206,13 +185,21 @@ public class BasicScheduler {
     // first fill the queues
     boolean jobsLeftToSchedule = bs.fillTheQueues();
 
+    // reuse job
+    Job j;
+
     // keep going until all queues are empty
     while(!(bs.high.isEmpty() && bs.medium.isEmpty() && bs.low.isEmpty())){
 
       /*
         Following order 4 points each
       */
-      bs.performWork();
+      j = bs.performWork();
+
+      if(j != null){
+        /* printing out the toString method, not something else - 2pts */
+        System.out.println("Completed: " + j.toString());
+      }
 
       // order matters - by rules, I can only promote once per tick.
       if(!bs.promoteMediumToEmptyHigh()){
