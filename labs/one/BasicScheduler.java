@@ -185,11 +185,11 @@ public class BasicScheduler {
     // first, give ourselves an instance
     BasicScheduler bs = new BasicScheduler();
 
-    // first fill the queues
-    boolean jobsLeftToSchedule = bs.fillTheQueues();
-
     // reuse job
     Job j;
+    
+    // first fill the queues
+    boolean jobsLeftToSchedule = bs.fillTheQueues();
 
     // keep going until all queues are empty
     while(!(bs.high.isEmpty() && bs.medium.isEmpty() && bs.low.isEmpty())){
