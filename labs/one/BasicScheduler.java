@@ -101,7 +101,6 @@ public class BasicScheduler {
     /* checking to see if the worker is done after doing work - 2pts */
     // if the worker finishes, remove from the queue and print its completion
     if(worker.isDone()){
-
       /* removing a completed worker - 2pts */
       return this.high.shift();
     }
@@ -187,7 +186,7 @@ public class BasicScheduler {
 
     // reuse job
     Job j;
-    
+
     // first fill the queues
     boolean jobsLeftToSchedule = bs.fillTheQueues();
 
