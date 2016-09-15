@@ -13,6 +13,9 @@ import labs.one.util.JobReader;
 
 public class BasicScheduler {
 
+  final int LOW_WAIT = 5;
+  final int MED_WAIT = 3;
+
   /* variables 7 points */
   int lowTick, mediumTick;
   NodeQueue<Job> high, medium, low, nextGroup;
@@ -147,7 +150,7 @@ public class BasicScheduler {
   void promoteMediumToHighOnWait(){
 
     /* modulating (or reseting) ticker so it only works every 3 - 2pts */
-    if(this.mediumTick == 3){
+    if(this.mediumTick == this.MED_WAIT){
       this._promote(this.medium, this.high);
       this.mediumTick = 1;
     } else {
@@ -160,7 +163,7 @@ public class BasicScheduler {
   void promoteLowToMediumOnWait(){
 
     /* modulating (or reseting) ticker so it only works every 5 - 2pts */
-    if(this.lowTick == 5){
+    if(this.lowTick == LOW_WAIT){
       this._promote(this.low, this.high);
       this.lowTick = 0;
     } else {
@@ -198,7 +201,7 @@ public class BasicScheduler {
 
       if(j != null){
         /* printing out the toString method, not something else - 2pts */
-        System.out.println("Completed: " + j.toString());
+        System.out.println("Completed: " + j);
       }
 
       // order matters - by rules, I can only promote once per tick.
