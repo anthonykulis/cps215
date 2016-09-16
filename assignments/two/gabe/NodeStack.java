@@ -5,7 +5,6 @@ import data_structures.nodes.Node;
 public class NodeStack<T> implements StackInterface<T>{
 
   private Node _top;
-  private int count;
 
   public NodeStack(){
     this.clear();
@@ -30,21 +29,13 @@ public class NodeStack<T> implements StackInterface<T>{
     } else {
       n = new Node<>(item, this._top);
     }
-    count++;
 
     this._top = n;
   }
 
-  /*
-    Instructors notes:
-    push() already exists, why reimplement it?
-  */
   public void push(T[] items){
-	  Node<T> n;
 	  for(int i=0; i<items.length; i++){
-		  n = new Node<>(itemList[i], this._top);
-		  this._top = n;
-		  count++;
+		  this.push(items[i]);
 	  }
   }
 
@@ -54,24 +45,15 @@ public class NodeStack<T> implements StackInterface<T>{
     this._top = n.next();
     T data = (T)n.getData();
     n.clearData();
-    count--;
     return data;
   }
 
-  /*
-    Instructors notes:
-    pop() already exists. Why reimplement it?
-  */
-  public T[] pop(int item){
-	  T[] temp=(T[])new Object[item];
-	  if(this._top == null && item>count){return null;}
-	  for(int i=0; i<item; i++){
-		  Node<T> n = this._top;
-		  this._top = n.next();
-		  temp[i] = (T)n.getData();
-		  n.clearData();
-		  count--;
-	  }
+  public T[] pop(int items){
+	  T[] temp = (T[])new Object[items];
+      for( int i = 0; i<items; i++){
+	  		temp[i]=this.pop();
+	  	}
+	  	
 	  return temp;
   }
 
@@ -125,27 +107,16 @@ public class NodeStack<T> implements StackInterface<T>{
       throw new RuntimeException("I cleared two items, still have items");
     }
 
-    /*
-      Instructor notes:
-      Your tests make this uncompilable. You have to fix this for points.
-    */
-    String[] inputArray=("One", "Two", "Three");
+    String[] inputArray={"One", "Two", "Three"};
     ns.push(inputArray);
     if(ns.isEmpty()){
     	throw new RuntimeException("Input three strings, but it is empty");
     }
 
     Object[] output=ns.pop(3);
-    if(output==null){
+    if(output.length!=3){
     	throw new RuntimeException("Items were not poped");
     }
-
-    ns.push(inputArray);
-    Object[] output2 = ns.pop(4)
-    if(output2=null){
-    	throw new RuntimeException("Requested 4, only have three available")
-    }
-
 
     System.out.println("NodeStack tests completed successfully");
   }
