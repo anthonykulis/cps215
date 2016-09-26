@@ -114,4 +114,27 @@ public class BrokenRecursiveMain {
 * Every time we call a method, we push that method onto the stack. As we call another method in the method, we push that method onto the stack inside the current method. If we have no stopping condition, this goes on until we run out of stack. **THIS IS VERY IMPORTANT TO UNDERSTAND**
   * [Tail Recursion Optimization](http://www.drdobbs.com/jvm/tail-call-optimization-and-java/240167044)
 
-  
+# Tail Recursion
+* When the last method call in the method is calling itself
+  * Does not include methods that do "extra" like add the recursive sum
+
+```java
+public void tailCall(){
+  // do something
+  // do something else
+  tailCall();
+}
+```
+
+# Indirect Recursion
+* When method *A* calls method *B* which calls method *A*
+
+```java
+public void first(){
+  second();
+}
+
+public void second(){
+  first();
+}
+```
