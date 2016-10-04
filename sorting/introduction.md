@@ -2,9 +2,10 @@
 
 ## Objectives
 After this chapter the student is responsible for the skills to:
-1. Sort an array in ascending order using either selection sort, insertion sort, counting sort
-2. Sort a chain of linked nodes into ascending order using insertion sort
-3. Assess the efficiency of a sort
+
+  1. Sort an array in ascending order using either selection sort, insertion sort, counting sort
+  2. Sort a chain of linked nodes into ascending order using insertion sort
+  3. Assess the efficiency of a sort
 
 ## Basics
 Sorting allows us to order objects or primitives in some order. This order can be anything relevant. Examples include a persons height, age, name; music by title, artist, release date, or popularity.
