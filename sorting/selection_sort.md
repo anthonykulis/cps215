@@ -3,6 +3,7 @@ This is a very easy algorithm to understand and hence is why students typically 
 
 ## Basics
 With position, `i = 0`, and `n` equal to array length
+
 1. Starting as position `i`, scan for smallest value from `i + 1` to `n`.
 2. Swap the position `i` with the position of the smallest value found.
 3. Increment `i` by one
