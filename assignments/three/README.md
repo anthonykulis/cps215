@@ -1,7 +1,7 @@
 # Assignment 3
 
 ## Turn Iterative Selection Sort into Recursive Selection Sort
-Provided in [ArraySort.java](../../sorting/ArraySort.java) is the iterative method `selectionSort`. You are tasked to convert this and all it's private helpers using iterative syntax into recursive methods. You may change any method parameters to suite your need.
+Provided in [ArraySorter.java](../../sorting/ArraySorter.java) is the iterative method `selectionSort`. You are tasked to convert this and all it's private helpers using iterative syntax into recursive methods. You may change any method parameters to suite your need.
 
 ### Pass/Fail
 This will be pass/fail. 25 points if you pass. 0 if you dont. To pass, you must have compilable code that runs correctly. Your unit tests will determine if they do. Unit tests are mandatory like they will be on all assignments.
