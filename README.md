@@ -6,10 +6,12 @@
 * [Stacks](data_structures/stacks)
 * [Queues](data_structures/queues)
 * [Recursion](recursion/)
+* [Sorting](sorting/)
 
 ### Assignments
 * [One](assignments/one/)
 * [Two](assignments/two)
+* [Three](assignments/three)
 
 ### Labs
 * [One](labs/one)
