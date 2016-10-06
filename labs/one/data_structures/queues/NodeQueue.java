@@ -31,7 +31,9 @@ public class NodeQueue<T> implements QueueInterface<T> {
 
     Node<T> n = this._front;
     this._front = this._front.next();
-    return (T)n.getData();
+    T data = (T)n.getData();
+    n.clearData();
+    return data;
   }
 
   public T peek(){
