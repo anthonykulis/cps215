@@ -1,4 +1,4 @@
-// Score 78/100
+// Score 79/100
 
 /*
 Not declarative
@@ -51,7 +51,7 @@ public class BasicScheduler {
       This may have been null. You need a check in this method. You
       also collected the reference to the same object 2x.
 
-      -1
+      -2
      */
       Job j = (Job)queue1.peek();
       queue1.shift();
@@ -82,7 +82,7 @@ public class BasicScheduler {
 
      This follows for the tick counters
 
-     -3
+     -1
      */
       NodeQueue<Job> queueA = new NodeQueue();
       NodeQueue<Job> queueB = new NodeQueue();
@@ -106,7 +106,7 @@ public class BasicScheduler {
            to run. While it may "work", it is still incorrect due to the lack of
            conciseness.
 
-           -4
+           -2
 
          */
          while((!queueA.isEmpty() || !queueB.isEmpty() || !queueC.isEmpty()) || !jobQueue.isEmpty()){
@@ -129,9 +129,6 @@ public class BasicScheduler {
                /*
                 You continue calling this even if the system told
                 you it has nothing left. This repeats in multiple places.
-
-               -5
-
                */
                jobQueue = reader.getNextGroupOfJobs();
 
@@ -144,9 +141,9 @@ public class BasicScheduler {
 
                   /*
                     Incorrect. Your promote both levels if medium priority
-                    queue is empty under the initial conditions
-
-                    -4
+                    queue is empty under the initial conditions. Plus you are
+                    not promoting if waited unless HP queue is not empty
+                    -8
                   */
                   if(!queueB.isEmpty()){
                      ticks = scheduler.promoteMedium(queueA, queueB, ticks);

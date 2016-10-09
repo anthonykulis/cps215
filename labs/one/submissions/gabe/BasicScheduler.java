@@ -105,6 +105,7 @@ public class BasicScheduler{
 
       }
 
+      // why?
       nq.clear();
 
 
@@ -113,7 +114,6 @@ public class BasicScheduler{
         incorrect. you were to only read a group of jobs
         once per tick.
 
-        -5
       */
       try{
          nq = jr.getNextGroupOfJobs();
