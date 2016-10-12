@@ -5,6 +5,7 @@ Counting sort is very easy and not often used, but I intend to show you this alg
 Counting sort uses space to overcome O(n<super>2</super>) efficiency found in most other sorting algorithms. To accomplish this, we are limited to sorting any types that represent whole numbers. We can also expand this into type `char` with slight modifications. I am sure we could even extend this to other custom data types if the logic follows how we accomplish this with the logic applied to whole numbers.
 
 Steps to Counting Sort
+
 1. Scan for largest number, `m`
 2. Create array of size `m` of type int, named `counts`
 3. Loop the unsorted array, and for each value found, increment a counter in the `counts` array for the value, `i`, found in the unsorted array.
