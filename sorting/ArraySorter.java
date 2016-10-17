@@ -2,14 +2,16 @@ package sorting;
 
 public class ArraySorter {
 
-  public static <T extends Comparable<? super T>> void selectionSort(T[] unsorted, int n){
+  public static <T extends Comparable<? super T>> void selectionSort(T[] unsorted){
+    int n = unsorted.length;
     for(int current = 0; current < n; current++){
       int smallest = findIndexOfSmallest(unsorted, current, n - 1);
       swap(unsorted, current, smallest);
     }
   }
 
-  public static <T extends Comparable<? super T>> void insertionSort(T[] unsorted, int n){
+  public static <T extends Comparable<? super T>> void insertionSort(T[] unsorted){
+    int n = unsorted.length;
     int found = -1;
     for(int i = 0; i < n; i++){
       found = findIndexOfNextSmallerItem(unsorted, i);
@@ -19,27 +21,12 @@ public class ArraySorter {
     }
   }
 
-  public static <T extends Comparable<? super T>> void mergeSort(T[] unsorted, int n){
+  public static <T extends Comparable<? super T>> void mergeSort(T[] unsorted){
+    int n = unsorted.length;
 
-    // jic they dont want it all sorted
-    T[] cacheCopy = unsorted;
-
-    // be graceful for this sandbox
-    if(n != unsorted.length && n < unsorted.length){
-      T[] t = (T[])new Comparable[n];
-      System.arraycopy(unsorted, 0, t, 0, n);
-      unsorted = t;
-    } else {
-      n = unsorted.length;
-    }
-
-    // call a helper with the new array to return
+    // call a helper with the new array
     T[] consumable = (T[])new Comparable[n];
     mergeSort(unsorted, consumable, 0, n - 1);
-
-    for(int i = 0; i < n; i++){
-      cacheCopy[i] = unsorted[i];
-    }
 
   }
 
@@ -120,15 +107,15 @@ public class ArraySorter {
   public static void main(String[] args){
     String[] selection = {"b", "c", "a", "z", "e", "A"};
     System.out.println("Unsorted Array: " + ArraySorter.viewArray(selection, "", 0));
-    ArraySorter.selectionSort(selection, selection.length);
+    ArraySorter.selectionSort(selection);
     System.out.println("Selection Sorted: " + ArraySorter.viewArray(selection, "", 0));
 
     String[] insertion = {"b", "c", "a", "z", "e", "A"};
-    ArraySorter.insertionSort(insertion, insertion.length);
+    ArraySorter.insertionSort(insertion);
     System.out.println("Insertion Sorted: " + ArraySorter.viewArray(insertion, "", 0));
 
     String[] merge = {"b", "c", "a", "z", "e", "A"};
-    ArraySorter.mergeSort(merge, 7);
+    ArraySorter.mergeSort(merge);
     System.out.println("Merge Sorted: " + ArraySorter.viewArray(merge, "", 0));
   }
 }

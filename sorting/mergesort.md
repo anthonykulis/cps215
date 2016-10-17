@@ -3,11 +3,6 @@ Merge Sort is the go to sorting algorithm, but not always the best. It's "downsi
 
 Divide and Conquer is what drives this algorithm. While I a mentioned divide and conquer when introducing recursion, this is the first algorithm you will see that truly leverages it.
 
-## Immutable Arrays
-We will treat merge sort with immutable arrays. This means we will not modify the passed array, but rather return a new, sorted array.
-
-There is reason for immutable items int the software engineering world that allow a better stream of working code with less bugs, and since merge sort requires an extra array to work, we will make this immutable and prevent issues that can arise later.
-
 ## Basics
 As we recurse downwards, we pass smaller and smaller slices of the array until we get to an array of size 1. On the "upward" path, we recombine the arrays using merges to sort.
 
