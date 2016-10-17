@@ -3,10 +3,10 @@ package sorting;
 public class ArraySorterRecursive {
 
   public static <T extends Comparable<? super T>> void selectionSort(T[] unsorted, int n){
-    for(int current = 0; current < n; current++){
-      int smallest = findIndexOfSmallest(unsorted, current, n - 1);
-      swap(unsorted, current, smallest);
-    }
+    if(n == unsorted.length){ return; }
+    int indexOfSmallest = findIndexOfSmallest(unsorted, n, n+1);
+    swap(unsorted, indexOfSmallest, n);
+    selectionSort(unsorted, n+1);
   }
 
   public static <T extends Comparable<?super T>> void insertionSort(T[] unsorted, int n){
@@ -17,16 +17,14 @@ public class ArraySorterRecursive {
     insertionSort(unsorted, n+1);
   }
 
-  private static <T extends Comparable<? super T>> int findIndexOfSmallest(T[] a, int start, int end){
-    T min = a[start];
-    int minIndex = start;
-    for(int i = start + 1; i <= end; i++){
-      if(a[i].compareTo(min) < 0){
-        min = a[i];
-        minIndex = i;
-      }
-    }
-    return minIndex;
+  private static <T extends Comparable<? super T>> int findIndexOfSmallest(T[] a, int index, int position){
+     if(position == a.length){
+        return index;
+     }
+     if(a[position].compareTo(a[index]) < 0){
+        index = position;
+     }
+     return findIndexOfSmallest(a, index, position+1);
   }
 
   private static void swap(Object[] a, int i, int j){
