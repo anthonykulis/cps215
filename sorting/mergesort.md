@@ -16,7 +16,7 @@ First, let us imagine the merge portion on 2 sorted arrays. Imagine these 2 arra
 We will need a second array to merge into
 
 |c[0]|c[1]|c[2]|c[3]|c[4]|c[5]|c[6]|
-|:---:|:---:|:---:|:---:|:---:|:---:|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |||||||||
 
 1. From indexes, `i`, and `j` starting at 0, compare `a[i]` to `b[j]`.
@@ -61,7 +61,7 @@ Starting with where we left off in the Divide.
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |1|23||4|16||5|8||2|3|
 
-|a[0]|a[1]||b[0]|b[1]||c[0]|c[1]||d[0]|d[1]|
+|a[0]|a[1]|a[2]|a[3]||b[0]|b[1]|b[2]|b[3]|
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |1|4|16|23||2|3|5|8||
 
