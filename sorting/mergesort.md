@@ -86,3 +86,4 @@ This means that `k - 1 < n < k`, and hence, Merge Sort will always be O(n log n)
 Iterative Merge Sort is **not** easy, so we will favor the recursive solution instead.
 
 ## Recursive Solution
+Implement Merge Sort. Using recursion to divide, use iteration to merge.
