@@ -4,11 +4,15 @@
 * You are allowed two 1 dimensional arrays. 
     * One is the array the user passes and will only hold the current fully, or partially, sorted set.
     * The other is a 1D array to manage your buckets. Your buckets may not be another array.
+    
 * You are allowed to import anything you may need to write the solution.
 * This should be written in the `ArraySorter.java` file and the method will only consider type `String`.
     * Make sure to write a method to left-pad your strings passed so each string is the same length. This pre-processing should not be automatically called but rather optionally called by the user to make the array ready for sorting.
     
     
+### Solutions
+There are many solutions to manage this sort. When released, I will provide the smallest space implmentation that I know of. YOu are completely welcome to attempt any solution you wish, as long as it follows the above rules. This means finding a solution online that used 3 arrays, even though correct, will not satisfy this assignments requirements and result in a fail.
+
 ### Pass/Fail
 * To receive the full 25 points, your solution must work iteratively. Extra credit will be given for a recursive solutin.
 * This will be pass/fail. 25 points if you pass. 0 if you dont. To pass, you must have compilable code that runs correctly. Your unit tests will determine if they do. Unit tests are mandatory like they will be on all assignments.
