@@ -28,11 +28,11 @@ We need create 10 buckets of length 5
 5 - 9: empty
 ```
 
-2. Now replace them sorted
+2. Now replace them as partially sorted
 
 `{001, 342, 134, 544, 034}`
 
-3. Moving one position left
+3. Moving one position left, and put them back into buckets
 
 ```
 0: [001]
@@ -43,10 +43,11 @@ We need create 10 buckets of length 5
 5 - 9: empty
 ```
 
-4. Now replace them again
+4. Now replace them again into the partially sorted array
+
 `{001, 134, 034, 342, 544}`
 
-5. Again, move one left of last position
+5. Again, move one left of last position, and use the buckets to sort
 
 ```
 0: [001, 034]
