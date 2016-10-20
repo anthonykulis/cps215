@@ -1,6 +1,9 @@
 # Radix Sort
 Radix Sort leverages extra space for a fast sort dating back to 1887. It can sort equal length values at O(n) speeds. It can be perfomed in LSD or MSD styles. We will use LSD.
+
 ## Basics
+I will use extra space than required for this example. There are even more succinct methods to solve this.
+
 
 Imagine an array of equal length values:
 
