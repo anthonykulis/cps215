@@ -146,7 +146,7 @@ This means your quickSort method will be -
 Algorithm quickSort(a, first, last){
   if(last - first + 1 < MIN_SIZE){
     // do insertion sort
-  else {
+  else if(first < last){
     // choose a pivot
     // partition the array around the pivot
     // set pivot index to current pivot position
