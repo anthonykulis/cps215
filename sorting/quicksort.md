@@ -43,7 +43,7 @@ private static int getRandomIndex(int from, int to){
 
 ||a[0]|a[1]|a[2]|a[3]|a[4]|a[5]|
 |:---|:--:|:--:|:--:|:--:|:--:|:--:|
-| Initial Array  | **15** | **8**  | **10** | **2**  | **5**  | ** 1 ** |
+| Initial Array  | **15** | **8**  | **10** | **2**  | **5**  | **1** |
 
 
 Select a random pivot
