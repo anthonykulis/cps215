@@ -15,6 +15,7 @@ Algorithm quickSort(a, first, last){
   if(first < last){
     // choose a pivot
     // partition the array around the pivot
+    // set pivot index to current pivot position
     quickSort(a, first, pivotIndex - 1);
     quickSort(a, pivotIndex + 1, last);
   }
@@ -148,6 +149,7 @@ Algorithm quickSort(a, first, last){
   else {
     // choose a pivot
     // partition the array around the pivot
+    // set pivot index to current pivot position
     quickSort(a, first, pivotIndex - 1);
     quickSort(a, pivotIndex + 1, last);
   }
