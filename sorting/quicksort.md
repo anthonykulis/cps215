@@ -42,21 +42,21 @@ private static int getRandomIndex(int from, int to){
 ## Visual Example
 
 ||a[0]|a[1]|a[2]|a[3]|a[4]|a[5]|
-|:---|:--:|:--:|:--:|:--:|:--:|
+|:---|:--:|:--:|:--:|:--:|:--:|:--:|
 | Initial Array  | **15** | **8**  | **10** | **2**  | **5**  | ** 1 ** |
 
 
 Select a random pivot
 
 ||a[0]|a[1]|a[2]|a[3]|a[4]|a[5]|
-|:---|:--:|:--:|:--:|:--:|:--:|:--:|
+|:---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | Pivot chosen  | 15 | **8** | 10 | 2  | 5 | 1 |
 
 
 Swap it with the last entry
 
 ||a[0]|a[1]|a[2]|a[3]|a[4]|a[5]|
-|:---|:--:|:--:|:--:|:--:|:--:|:--:|
+|:---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | Pivot chosen  | 15 | 1 | 10 | 2  | 5 | **8** |
 
 Starting at the beginning of the array, look for the first entry that is greater or equal to the pivot.
@@ -68,37 +68,37 @@ Starting at the beginning of the array, look for the first entry that is greater
 Now that we found it, reverse the logic, starting at the next to last entry in the array (left of the pivot), look for the first entry less than or equal to the pivot.
 
 ||a[0]|a[1]|a[2]|a[3]|a[4]|a[5]|
-|:---|:--:|:--:|:--:|:--:|:--:|
+|:---|:--:|:--:|:--:|:--:|:--:|:--:|
 | Find last <= pivot  | -> 15 | 1 | 10 | 2  | 5 <- | **8** |
 
 If the `fromLeft` index is less than the `fromRight` index, swap the two entries.
 
 ||a[0]|a[1]|a[2]|a[3]|a[4]|a[5]|
-|:---|:--:|:--:|:--:|:--:|:--:|
+|:---|:--:|:--:|:--:|:--:|:--:|:--:|
 | Swap  | 5 <- | 1 | 10 | 2  | -> 15 | **8** |
 
 Continue with the next set finding greater than or equal to pivot
 
 ||a[0]|a[1]|a[2]|a[3]|a[4]|a[5]|
-|:---|:--:|:--:|:--:|:--:|:--:|
+|:---|:--:|:--:|:--:|:--:|:--:|:--:|
 | Find next >= pivot | 5  | 1 | -> 10 | 2  | 15 | **8** |
 
 Continue with the next set finding less than or equal to pivot
 
 ||a[0]|a[1]|a[2]|a[3]|a[4]|a[5]|
-|:---|:--:|:--:|:--:|:--:|:--:|
+|:---|:--:|:--:|:--:|:--:|:--:|:--:|
 | Find next <= pivot | 5  | 1 | -> 10 | 2 <- | 15 | **8** |
 
 Since `fromLeft` index is less than the `fromRight` index, swap the two entries
 
 ||a[0]|a[1]|a[2]|a[3]|a[4]|a[5]|
-|:---|:--:|:--:|:--:|:--:|:--:|:--:|
+|:---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | Swap | 5  | 1 | 2 <- | -> 10  | 15 | **8** |
 
 Continue to end of array partition. We find in our example there are no more swaps. We encounter an entries `fromLeft` that is past the pivot position. So we stop and wait. We continue `fromRight` until we find one. If we did find one, we could not swap and would exit the partition loop. In our case we ran out of array, so we would stop.
 
 ||a[0]|a[1]|a[2]|a[3]|a[4]|a[5]|
-|:---|:--:|:--:|:--:|:--:|:--:|
+|:---|:--:|:--:|:--:|:--:|:--:|:--:|
 | Find next >= pivot | 5  | 1 | 2  | -> 10  | 15  | **8**|
 | Find next <= pivot | <- 5  | 1 | 2  | -> 10  | 15  | **8**|
 
@@ -106,13 +106,13 @@ Now that we cannot continue because of lack of array, or if we found a greater t
 
 
 ||a[0]|a[1]|a[2]|a[3]|a[4]|a[5]|
-|:---|:--:|:--:|:--:|:--:|:--:|
+|:---|:--:|:--:|:--:|:--:|:--:|:--:|
 | Swap pivot with a[fromLeft] | 5  | 1 | 2  | **8** | 15  | 10 |
 
 Now we would divide and repeat. For brevity, I will not detail every step.
 
 ||a[0]||a[1]||a[2]|a[3]|a[4]|a[5]|
-|:---|:--:|:--:|:--:|:--:|:--:|
+|:---|:--:|:--:|:--:|:--:|:--:|:---|:--:|:--:|:--:|:--:|:--:|
 | Split among the pivot index | 5  | 1 | 2  || 8 || 15  | 10 |
 | Randomly select left pivot | 5  | **1** | 2  || 8 || 15  | 10 |
 | Randomly select right pivot |  5  | **1** | 2  || 8 || 15  | **10** |
@@ -127,7 +127,7 @@ Now we would divide and repeat. For brevity, I will not detail every step.
 ...
 
 |||a[0]||a[1]||a[2]||a[3]||a[4]||a[5]|
-|:---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+|:---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---|:--:|:--:|:--:|:--:|:--:|
 | Partition again || 1  || 2 || 5  || 8 || 10 || 15 |
 
 ## Iterative Solution
