@@ -97,6 +97,11 @@ public class ArraySorter {
     a[++s] = cached;
   }
 
+  // provides a random index within the bounds, exclusively
+  private static int getRandomIndex(int from, int to){
+    return (int)(Math.random() * (to - 1) + from + 1);
+  }
+
   // for testing reasons only
   public static String viewArray(Object[] a, String contents, int pos){
     if(pos == a.length){ return contents; }
@@ -117,5 +122,6 @@ public class ArraySorter {
     String[] merge = {"b", "c", "a", "z", "e", "A"};
     ArraySorter.mergeSort(merge);
     System.out.println("Merge Sorted: " + ArraySorter.viewArray(merge, "", 0));
+
   }
 }
