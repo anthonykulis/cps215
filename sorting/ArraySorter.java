@@ -98,8 +98,13 @@ public class ArraySorter {
   }
 
   // provides a random index within the bounds, exclusively
-  private static int getRandomIndex(int from, int to){
-    return (int)(Math.random() * (to - 1) + from + 1);
+  private static int naiveRandomStrategy(int from, int to){
+    if(to - from < 2){ return from; }
+    return (int)(Math.random() * (to - from - 1)) + from + 1;
+  }
+
+  public static int getNaiveRandomStrategy(int from, int to){
+    return naiveRandomStrategy(from, to);
   }
 
   // for testing reasons only
@@ -122,6 +127,7 @@ public class ArraySorter {
     String[] merge = {"b", "c", "a", "z", "e", "A"};
     ArraySorter.mergeSort(merge);
     System.out.println("Merge Sorted: " + ArraySorter.viewArray(merge, "", 0));
+
 
   }
 }
