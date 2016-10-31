@@ -9,12 +9,15 @@ Allows the user to *traverse* a collection.
 * `public T next()`
   * Returns the next item in the list
     * Throws an exception otherwise
+* `public int index()`
+  * Returns the index of the iterators current position, which is the value of the index *after* `next()` is called
 
-## Iterator Interface
+## List Iterator Interface
 
 ```java
-public interface IteratorInterface<T>{
+public interface ListIteratorInterface<T>{
   public boolean hasNext();
   public T next();
+  public int index();
 }
 ```
