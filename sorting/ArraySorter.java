@@ -103,9 +103,6 @@ public class ArraySorter {
     return (int)(Math.random() * (to - from - 1)) + from + 1;
   }
 
-  public static int getNaiveRandomStrategy(int from, int to){
-    return naiveRandomStrategy(from, to);
-  }
 
   // for testing reasons only
   public static String viewArray(Object[] a, String contents, int pos){
