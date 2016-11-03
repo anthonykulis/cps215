@@ -15,9 +15,13 @@ Allows the user to *traverse* a collection.
 ## List Iterator Interface
 
 ```java
-public interface ListIteratorInterface<T>{
+public interface ListIterator<T>{
   public boolean hasNext();
   public T next();
   public int index();
+
+  // note - i added this method not for public consumption
+  // but ease of use when adding/removing at index
+  public Node<T> nextNode();
 }
 ```

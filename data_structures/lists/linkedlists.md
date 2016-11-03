@@ -59,7 +59,7 @@ public interface ListInterface<T> {
   public T remove(int index);
   public int size();
   public void clear();
-  public void isEmpty();
-  public Iterator<T> iterator();
+  public boolean isEmpty();
+  public ListIterator<T> iterator();
 }
 ```
