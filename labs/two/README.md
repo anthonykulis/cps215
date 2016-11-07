@@ -8,11 +8,7 @@ You will create a list that is ordered for searching and has constant time look 
 
 ## Rules
 
-1. You may only use data structures and algorithms you created. This means the only class you may import to use data structures is `sorting.ArraySorter` or an extension of `sorting.ArraySorter` if you so choose. You may import any other class as needed as long as it not a data structure provided by java.
-
-Sorting must be done via your `ArraySorter` class.
-
-There is **one** exception to this import rule, you are allowed to use `java.util.ArrayList` to manage your hash keys. You are only allowed to use this for managing your keys and only allowed to use the `add` and `remove` methods. Any other use will result in a 0.
+1. You may only use data structures and algorithms you created. This means the only class you may import to use data structures is `sorting.ArraySorter` or an extension of `sorting.ArraySorter` if you so choose. You may import any other class as needed as long as it not a data structure provided by java. Sorting must be done via your `ArraySorter` class. There is **one** exception to this import rule, you are allowed to use `java.util.ArrayList` to manage your hash keys. You  are only allowed to use this for managing your keys and only allowed to use the `add` and `remove` methods. Any other use will result in a 0.
 
 
 2. I should be able add at `O(1)` efficiency with a key of my choosing restricted to an upper bound of type `String` but it should map to any type of value. The user will not be able to add at index or add to the back of the list. You will need to extend `LinkedList` and overwrite those methods to throw exceptions if called. Any exception is acceptable for this lab.
@@ -27,11 +23,7 @@ There is **one** exception to this import rule, you are allowed to use `java.uti
 
 5. I should be able to request an iterator that iterates in sorted ascending order. Follow the logic in #4 for this iterator.
 
-6. The search space for keys will be restricted to a size of 2048. This means you will have collisions and they have to be handled.
-
-To handle these, if not already handled before, you will add the passed item to a collision list indexed by the hash value. The "item" value of a new node will be a helper class. You will need a helper class to store the actual key the user supplied and the item passed, this way when a collision does occur, you can find the actual item passed. This also means that every item in our collision list is the helper class and the user passed `item` value is a member variable inside that helper class. This is not the optimal way, but for this class it exercises our usage of data structures.
-
-Furthermore, this helper class must be immutable! This means it has no setters/mutators, only getters/accessors. To set the values you will use a constructor. The signature for the constructor should be `public CollisionItem(String key, T item);`. Of course `CollisionItem` will need to be a generic class. You can then call your collision list as `new LinkedList<CollisionItem<T>>()`.
+6. The search space for keys will be restricted to a size of 2048. This means you will have collisions and they have to be handled. To handle these, if not already handled before, you will add the passed item to a collision list indexed by the hash value. The "item" value of a new node will be a helper class. You will need a helper class to store the actual key the user supplied and the item passed, this way when a collision does occur, you can find the actual item passed. This also means that every item in our collision list is the helper class and the user passed `item` value is a member variable inside that helper class. This is not the optimal way, but for this class it exercises our usage of data structures. Furthermore, this helper class must be immutable! This means it has no setters/mutators, only getters/accessors. To set the values you will use a constructor. The signature for the constructor should be `public CollisionItem(String key, T item);`. Of course `CollisionItem` will need to be a generic class. You can then call your collision list as `new LinkedList<CollisionItem<T>>()`.
 
 
 ## Tips for attacking the problem.
