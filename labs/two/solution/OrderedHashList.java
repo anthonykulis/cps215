@@ -17,7 +17,7 @@ import sorting.ArraySorter;
 */
 public class OrderedHashList<K extends Comparable<? super K>, V> {
 
-  /* 
+  /*
     constant size 1pt
     private keymap 1pt
     array of LinkedList for collisions 1pt
@@ -53,7 +53,8 @@ public class OrderedHashList<K extends Comparable<? super K>, V> {
     removes it from the collision list 1pt
     returns value 1pt
   */
-  public V remove(K key){
+  public V remove(K key) {
+    if(key == null) return null;
     CollisionItem ci;
     this.keys.remove(key);
     LList collisions = values[this.toHashCode(key)];
@@ -83,7 +84,8 @@ public class OrderedHashList<K extends Comparable<? super K>, V> {
   compareTo key verse collision key 1pt
   returns value on collision hit 1pt
   */
-  public V get(K key){
+  public V get(K key) {
+    if(key == null) return null;
     CollisionItem ci;
     LList collisions = values[this.toHashCode(key)];
     if(collisions.size() == 0) return null;
@@ -117,8 +119,8 @@ public class OrderedHashList<K extends Comparable<? super K>, V> {
   inner class has index tracking variable 1pt
   inner class has keys trackign variable 1pt
   */
-  public OrderedHashListIterator<K,V> iterator(){
-    return new OrderedHashListIterator<K,V>(){
+  public OrderedHashListIterator iterator(){
+    return new OrderedHashListIterator(){
 
       private int _index = 0;
       private K[] _keys = (K[])keys();
