@@ -2,7 +2,9 @@ package data_structures.hashmap;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 /*
   A very simple hashmap to
   hash a key to a value
@@ -13,11 +15,11 @@ import java.util.Iterator;
   Use for storing keys for later.
 */
 
-public class KeyMap<K,V> {
+public class KeyMap<K extends Comparable<? super K>> {
   private final int SIZE = 4096;
-  private ArrayList<V> store = new ArrayList<>(SIZE);
+  private ArrayList<K> store = new ArrayList<>(SIZE);
 
-  public void add(K key, V value){
+  public void add(K key){
     int keyHash = key.hashCode();
 
     /*
@@ -27,32 +29,29 @@ public class KeyMap<K,V> {
     */
     this.store.ensureCapacity(keyHash + 1);
     while(this.store.size() <= keyHash) this.store.add(null);
-    this.store.set(keyHash, value);
+    this.store.set(keyHash, key);
   }
 
   /*
    NOTE: DOES NOT CONISDER KEYS OUT OF RANGE
   */
-  public V get(String key){
-    return this.store.get(key.hashCode());
+  public K get(K key){
+    return (K)this.store.get(key.hashCode());
   }
 
   /*
    NOTE: DOES NOT CONISDER KEYS OUT OF RANGE
   */
-  public V remove(String key){
-    return this.store.remove(key.hashCode());
+  public K remove(K key){
+    return (K)this.store.remove(key.hashCode());
   }
 
   @SuppressWarnings("unchecked")
-  public Object[] toArray(){
-    ArrayList<V> t = new ArrayList();
-    Iterator<V> it = this.store.iterator();
-    while(it.hasNext()){
-      V item = it.next();
-      if(item != null) t.add(item);
-    }
-    return t.toArray();
+  public K[] toArray(){
+    Set<K> v = new HashSet<K>(store);
+    v.remove(null);
+    Object[] a = v.toArray();
+    return Arrays.asList(a).toArray((K[])new Comparable[a.length]);
   }
 
 }
