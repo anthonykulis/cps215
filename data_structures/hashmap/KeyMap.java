@@ -15,11 +15,11 @@ import java.util.Set;
   Use for storing keys for later.
 */
 
-public class KeyMap<K ,V extends Comparable<? super V>> {
+public class KeyMap<K extends Comparable<? super K>> {
   private final int SIZE = 4096;
-  private ArrayList<V> store = new ArrayList<>(SIZE);
+  private ArrayList<K> store = new ArrayList<>(SIZE);
 
-  public void add(K key, V value){
+  public void add(K key){
     int keyHash = key.hashCode();
 
     /*
@@ -29,29 +29,29 @@ public class KeyMap<K ,V extends Comparable<? super V>> {
     */
     this.store.ensureCapacity(keyHash + 1);
     while(this.store.size() <= keyHash) this.store.add(null);
-    this.store.set(keyHash, value);
+    this.store.set(keyHash, key);
   }
 
   /*
    NOTE: DOES NOT CONISDER KEYS OUT OF RANGE
   */
-  public V get(K key){
-    return (V)this.store.get(key.hashCode());
+  public K get(K key){
+    return (K)this.store.get(key.hashCode());
   }
 
   /*
    NOTE: DOES NOT CONISDER KEYS OUT OF RANGE
   */
-  public V remove(K key){
-    return (V)this.store.remove(key.hashCode());
+  public K remove(K key){
+    return (K)this.store.remove(key.hashCode());
   }
 
   @SuppressWarnings("unchecked")
-  public V[] toArray(){
-    Set<V> v = new HashSet<V>(store);
+  public K[] toArray(){
+    Set<K> v = new HashSet<K>(store);
     v.remove(null);
     Object[] a = v.toArray();
-    return Arrays.asList(a).toArray((V[])new Comparable[a.length]);
+    return Arrays.asList(a).toArray((K[])new Comparable[a.length]);
   }
 
 }
