@@ -18,7 +18,7 @@ You will create a list that is ordered for searching and has constant time look 
   * Note: removing at `O(1)` also includes removing from the collection of keys. Make sure you index properly.
 
 
-4. I should be able to request the set of keys that map **every** item. This method should return an array of **ordered** keys. You will need to use your `ArraySorter` class to handle this. This should cost no more then `O(n log n)` in the worst case on large arrays and `O(n<sup>2</sup>)` on small arrays.
+4. I should be able to request the set of keys that map **every** item. This method should return an array of **ordered** keys. You will need to use your `ArraySorter` class to handle this. This should cost no more then `O(n log n)` in the worst case on large arrays and O(n<sup>2</sup>) on small arrays.
 
 5. I should be able to request an iterator that iterates in sorted ascending order. Follow the logic in #4 for this iterator.
 
