@@ -67,4 +67,4 @@ Don't get a 0.
 As stated in the submission requirements, any missing previous assignments included in your supporting code will be used as submissions for those previous assignments.
 
 ## Due Date
-This will be due the last day of classes, December 9, 2016, at midnight. There will be no late sumbissions.
+This will be due the last day of classes, December 9, 2016, at midnight. There will be no late submissions.
