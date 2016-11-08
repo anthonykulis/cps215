@@ -1,7 +1,7 @@
 # Lab Two
 **OrderedHashList**
 
-This lab will exercise your understanding of sorting, linked lists, and the ArrayList class from java container framework.
+This lab will exercise your understanding of sorting, linked lists, hashing.
 
 ## Concept
 You will create a list that is ordered for searching and has constant time look up. It would be wise to simply extend `LinkedList` into your new class.
@@ -12,16 +12,13 @@ You will create a list that is ordered for searching and has constant time look 
 
 Sorting must be done via your `ArraySorter` class.
 
-There is **one** exception to this import rule, you are allowed to use `java.util.ArrayList` to manage your hash keys. You are only allowed to use this for managing your keys and only allowed to use the `add` and `remove` methods. Any other use will result in a 0.
-
 
 2. I should be able add at `O(1)` efficiency with a key of my choosing restricted to an upper bound of type `String` but it should map to any type of value. The user will not be able to add at index or add to the back of the list. You will need to extend `LinkedList` and overwrite those methods to throw exceptions if called. Any exception is acceptable for this lab.
 
-  * Note: since you will be collecting the keys in an ArrayList the ArrayList may have reached it's current maximum size. For the purpose of this labs requirements, that resize will not count against the `O(1)` rule.
-  * Tip: using `ArrayList::add(T item)` will not allow you to access it later at `O(1)`.
+  * Note: since you will be collecting the keys in my `data_structures.hashmap.KeyMap`, it may have reached it's current maximum size. For the purpose of this labs requirements, that resize will not count against the `O(1)` rule.
 
-3. I should be able to remove an item by key or remov from the front of the list at speeds of `O(1)`. Follow the logic in rule #2 for handling removing by index.
-  * Note: removing at `O(1)` also includes removing from the collection of keys. This means you will not be able to use `remove(T item)` method and get full credit. You will have to access the ArrayList item logically. You should assume that `ArrayList::remove(T item)` does not operator at `O(1)` time.
+3. I should be able to remove an item by key or remove from the front of the list at speeds of `O(1)`. Follow the logic in rule #2 for handling removing by index.
+  * Note: removing at `O(1)` also includes removing from the collection of keys. Make sure you index properly.
 
 4. I should be able to request the set of keys that map **every** item. This method should return an array of **ordered** keys. You will need to use your `ArraySorter` class to handle this. This should cost no more then `O(n log n)` in the worst case on large arrays and `O(n<sup>2</sup>)` on small arrays.
 
