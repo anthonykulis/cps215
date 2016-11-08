@@ -9,7 +9,7 @@ import sorting.ArraySorter;
 public class OrderedHashList<K extends Comparable<? super K>, V> {
 
   private final int SEARCH_SPACE_SIZE = 2048;
-  private final KeyMap<K,K> keys = new KeyMap<>();
+  private final KeyMap<K> keys = new KeyMap<>();
   private final LList<CollisionItem>[] values = new LList[SEARCH_SPACE_SIZE];
 
   public void add(K key, V value) throws NullPointerException {
@@ -17,7 +17,7 @@ public class OrderedHashList<K extends Comparable<? super K>, V> {
     int hash = this.toHashCode(key);
     if(values[hash] == null) values[hash] = new LList<CollisionItem>();
     this.values[hash].add(new CollisionItem(key, value));
-    this.keys.add(key, key);
+    this.keys.add(key);
   }
 
   public V remove(K key){
@@ -107,7 +107,7 @@ public class OrderedHashList<K extends Comparable<? super K>, V> {
 
   public static void main(String[] args){
     OrderedHashList<String, String> ohl = new OrderedHashList<>();
-    
+
     ohl.add("dog", new String("Dog"));
     ohl.add("cat", new String("Cat"));
     Object[] keys = ohl.keys();
