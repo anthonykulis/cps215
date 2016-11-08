@@ -149,4 +149,18 @@ This makes sense! But how far do we want to increase the search space? At some p
 
 ### Chaining
 
-So we have covered
+So we have covered how collisions can occur, we now need to explain how to handle them with chaining. With chaining, we sacrifice some linear search by "chaining" the collisions together. Typically the easiest method to this is to use a linked list such that the node linking the list is extended to accept a key value or a wrapping class is used to hold both the key and the value.
+
+The easiest method is to extend `Node` so that it holds a key value.
+
+```java
+public class CollisionNode extends Node {
+  private String key;
+  public CollisionNode(String key, T value){
+    super();
+    this.key = key;
+  }
+
+  public String getKey(){ return this.key; }
+}
+```
