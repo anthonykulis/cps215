@@ -16,10 +16,13 @@ import java.util.Set;
 */
 
 public class KeyMap<K extends Comparable<? super K>> {
+
   private final int SIZE = 4096;
   private ArrayList<K> store = new ArrayList<>(SIZE);
 
   public void add(K key){
+
+    // hash our key
     int keyHash = key.hashCode();
 
     /*
@@ -29,6 +32,8 @@ public class KeyMap<K extends Comparable<? super K>> {
     */
     this.store.ensureCapacity(keyHash + 1);
     while(this.store.size() <= keyHash) this.store.add(null);
+
+    // store our key
     this.store.set(keyHash, key);
   }
 
@@ -46,11 +51,33 @@ public class KeyMap<K extends Comparable<? super K>> {
     return (K)this.store.remove(key.hashCode());
   }
 
+  /*
+  There is trickery in here. I will comment each step
+  */
   @SuppressWarnings("unchecked")
   public K[] toArray(){
+
+    /*
+      uses HashSet to automatically convert my ArrayList
+      into a set. A set can have no duplicates. So removes all but one
+      null that showed up from lazily populating the array
+    */
     Set<K> v = new HashSet<K>(store);
+
+    // remove that one remaining null
     v.remove(null);
+
+    // now I have an array of just keys
     Object[] a = v.toArray();
+
+    /*
+      this is a fancy way of converting the object items in a to comparable
+      with a lower bound of K. All it does is allow me to return to your
+      keys method an array that can be sorted. Since the final type is
+      comparable, you can use the polymorphism to call upon ArraySorter.quickSort().
+      Just make sure to cast your sorted array back to Object[] to meet the
+      signature requirements.
+    */
     return Arrays.asList(a).toArray((K[])new Comparable[a.length]);
   }
 
