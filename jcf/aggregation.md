@@ -14,7 +14,7 @@ A lambda is a computer term which simply means the syntax has no belonging to a 
     
 From Java 8 Docs:
     
-    * The body can be either a single expression or a statement block. In the expression form, the body is simply evaluated and returned. In the block form, the body is evaluated like a method body and a return statement returns control to the caller of the anonymous method. The break and continue keywords are illegal at the top level, but are permitted within loops. If the body produces a result, every control path must return something or throw an exception.
+* The body can be either a single expression or a statement block. In the expression form, the body is simply evaluated and returned. In the block form, the body is evaluated like a method body and a return statement returns control to the caller of the anonymous method. The break and continue keywords are illegal at the top level, but are permitted within loops. If the body produces a result, every control path must return something or throw an exception.
 
 #### Example
     (String s, int x, Object o) -> (return o.toString() + x + s);
