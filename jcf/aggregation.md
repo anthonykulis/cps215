@@ -2,7 +2,7 @@
 
 ## Lambdas
 
-Purpose is to provide a "syntacical sugar" while using JCF. Instead of having to write many lines of code to manipulate a data structure, Java 8 has provided this syntax to speed up the process.
+Purpose is to provide a "syntactic sugar" while using JCF. Instead of having to write many lines of code to manipulate a data structure, Java 8 has provided this syntax to speed up the process.
 
 ### Lambda Meaning
 A lambda is a computer term which simply means the syntax has no belonging to a scope. It does not belong to the class nor a method in the class.
