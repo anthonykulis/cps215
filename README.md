@@ -8,13 +8,17 @@
 * [Recursion](recursion/)
 * [Sorting](sorting/)
 
+
 ### Assignments
 * [One](assignments/one/)
 * [Two](assignments/two)
 * [Three](assignments/three)
+* [Four](assignments/four)
+* [Five](assignments/five)
 
 ### Labs
 * [One](labs/one)
+* [Two](labs/two)
 
 ## Cloning a repository to Windows via Windows Github desktop
 [Tutorial](https://help.github.com/desktop/guides/contributing/cloning-a-repository-from-github-desktop/#cloning-repositories)
