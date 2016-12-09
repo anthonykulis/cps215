@@ -7,7 +7,11 @@
 * [Queues](data_structures/queues)
 * [Recursion](recursion/)
 * [Sorting](sorting/)
-
+* [Deques](data_structures/deques)
+* [Lists](data_structures/lists)
+* [Hashing](hashing/)
+* [Searching](searching/)
+* [Trees](trees/)
 
 ### Assignments
 * [One](assignments/one/)
