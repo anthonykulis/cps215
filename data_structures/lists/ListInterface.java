@@ -6,7 +6,12 @@ public interface ListInterface<T> {
   public T remove();
   public T remove(int index);
   public int size();
+  public ListIterator<T> iterator();
+  
+  /* 
+    Typical helpers. 
+  */
   public void clear();
   public boolean isEmpty();
-  public ListIterator<T> iterator();
+  
 }
