@@ -22,6 +22,7 @@ public class KeyMap<K extends Comparable<? super K>> {
 
   public void add(K key){
 
+
     // hash our key
     int keyHash = key.hashCode();
 
@@ -33,7 +34,6 @@ public class KeyMap<K extends Comparable<? super K>> {
     this.store.ensureCapacity(keyHash + 1);
     while(this.store.size() <= keyHash) this.store.add(null);
 
-    // store our key
     this.store.set(keyHash, key);
   }
 
@@ -78,6 +78,7 @@ public class KeyMap<K extends Comparable<? super K>> {
       Just make sure to cast your sorted array back to Object[] to meet the
       signature requirements.
     */
+
     return Arrays.asList(a).toArray((K[])new Comparable[a.length]);
   }
 
