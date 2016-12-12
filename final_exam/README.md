@@ -78,3 +78,4 @@ There are 4 extra credit problems. To be counted, each problem must be completed
 ### Problem 4 (10 Percentage Points)
 
 * `aggregateBestRatedFromEachMediaTypeForEachGender` - The user should get back a map whose keys are all the genders of authors. The values of this map are the values of each social media type that subsequently map to the best media posting (AI Rating) of that type. So its a map nested in a map. Example: `Map<String, Map<String, Object>>`
+
